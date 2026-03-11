@@ -1,0 +1,91 @@
+---
+title: "ENVS 193 DS Final"
+author: "Claire Timm"
+date: "2026-03-11"
+format: 
+  html: 
+    toc: true #display table of contents
+    toc-location: right
+    toc-depth: 3
+    smooth-scroll: true
+editor: visual
+message: false
+warning: false 
+---
+
+# Set Up
+
+```{r}
+#| label: read in packages and data
+#| message: false
+#| warning: false
+
+#read in packages here
+library(tidyverse)
+library(here)
+library(janitor)
+library(readxl)
+library(ggeffects)
+library(readr)
+
+#read in data here
+
+```
+
+# Problem 1. Research writing
+
+## a. 
+
+## b. 
+
+## c. 
+
+## d. 
+
+# Problem 2. Data visualization
+
+## a.  
+
+## b.  
+
+## c. 
+
+## d.  
+
+# Problem 3. Data analysis
+
+## a.  
+
+## b.  
+
+## c.  
+
+## d.  
+
+## e.  
+
+## f.  
+
+## g. 
+
+## h. 
+
+## i. 
+
+## j. 
+
+# Problem 4. Affective and exploratory visualization
+
+## a. 
+
+## b. 
+
+## c. 
+
+## d. 
+
+## e. 
+
+## f. 
+
+## g. 
