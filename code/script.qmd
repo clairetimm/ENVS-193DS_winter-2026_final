@@ -29,7 +29,7 @@ library(ggeffects)
 library(readr)
 
 #read in data here
-
+kelp <- read_csv("data/SBS_Kelp_All_Years_20250225.csv")
 ```
 
 # Problem 1. Research writing
@@ -57,6 +57,31 @@ An additional variable that could influence the flooded area of a wetland is wat
 # Problem 2. Data visualization
 
 ## a.
+
+```{r}
+#| label: cleaning data
+#| message: false
+#| warning: false
+kelp_clean <- kelp |> #create new object kelp_clean
+  clean_names() |>  #clean up column names (all lowercase and underscores not spaces)
+  filter(site %in% c("IVEE", "NAPL", "CARP")) |> #selects only data from these 3 sites
+  filter(!(date == "2000-09-22" & transect == "6" & quad == "40")) |> #removes a specific observation (probably bad data or an error in collection)
+  mutate(site_name = case_when(
+  site == "NAPL" ~ "Naples",
+  site == "IVEE" ~ "Isla Vista",
+  site == "CARP" ~ "Carpinteria"
+)) |> #creates a new column and changes site codes into names
+  mutate(site_name = as_factor(site_name),
+       site_name = fct_relevel(site_name,
+                               "Naples", "Isla Vista", "Carpinteria")) |> #changes site_name to a factor and sets the order of site levels 
+  group_by(site_name, year) |> #groups data by site and year for summary calculations 
+  summarize(mean_fronds = mean(fronds)) |> #calculates the mean number of fronds for each site/year group 
+  ungroup() #ungroups data so the data frame can be used normally after 
+
+slice_sample(kelp_clean, n = 5) #randomly displays 5 observations (rows) from the dataset 
+
+str(kelp_clean) #shows the structure of the data frame (variables, data types, and size)
+```
 
 ## b.
 
