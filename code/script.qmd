@@ -34,58 +34,70 @@ library(readr)
 
 # Problem 1. Research writing
 
-## a. 
+## a.
 
-## b. 
+In part one the researchers used a linear regression test to determine whether precipitation predicts flooded wetland area. This is because both variables are continuous, the predictor variable is precipitation and the response variable is flooded wetland area (m^2^).
 
-## c. 
+In the second part, my coworker likely used a Kruskal-Wallis test to evaluate if median flooded wetland area differs across water year classifications. This test is used to compare medians across more than two groups, in this study the groups were wet, above normal, below normal, dry, or critical drought.
 
-## d. 
+## b.
+
+A box plot could be used to visualize the test in part 2. This graph will have water year classification on the x-axis (wet, above normal, below normal, dry, critical drought) and flooded wetland area (m^2^) on the y-axis. There will be a different colored box plot for each water year classification, each plot will have a median line which will show the statistic being compared in a Kruskal-Wallis test. Additionally there will also be individual data points jittered on the graph to show the distribution of individual observations. The purpose of this graph is to visually allow readers to compare the median flooded wetland area across each of the categories for water year type.
+
+## c.
+
+We retained the null hypothesis that precipitation doesn’t predict flooded wetland area (linear regression, , p = 0.11, ⍺ = significance level).
+
+We retained the null hypothesis and found no difference (η^2^ = stat) in median flooded wetland area (m^2^) across water year classification (wet, above normal, below normal, dry, critical drought) (Kruskal-Wallis test, 𝜒^2^(2)= stat, p = 0.12, ⍺ = significance level).
+
+## d.
+
+An additional variable that could influence the flooded area of a wetland is water management for wetlands. This is a binary categorical variable (managed vs un-managed). If management actions are taken, such as pumping water or using control gates, this will
 
 # Problem 2. Data visualization
 
-## a.  
+## a.
 
-## b.  
+## b.
 
-## c. 
+## c.
 
-## d.  
+## d.
 
 # Problem 3. Data analysis
 
-## a.  
+## a.
 
-## b.  
+## b.
 
-## c.  
+## c.
 
-## d.  
+## d.
 
-## e.  
+## e.
 
-## f.  
+## f.
 
-## g. 
+## g.
 
-## h. 
+## h.
 
-## i. 
+## i.
 
-## j. 
+## j.
 
 # Problem 4. Affective and exploratory visualization
 
-## a. 
+## a.
 
-## b. 
+## b.
 
-## c. 
+## c.
 
-## d. 
+## d.
 
-## e. 
+## e.
 
-## f. 
+## f.
 
-## g. 
+## g.
