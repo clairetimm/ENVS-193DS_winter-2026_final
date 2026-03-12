@@ -169,7 +169,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#read in data here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#read in data here</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>kelp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/SBS_Kelp_All_Years_20250225.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="problem-1.-research-writing" class="level1">
@@ -185,57 +186,172 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="c." class="level2">
 <h2 class="anchored" data-anchor-id="c.">c.</h2>
+<p>We retained the null hypothesis that precipitation doesn’t predict flooded wetland area (linear regression, , p = 0.11, ⍺ = significance level).</p>
+<p>We retained the null hypothesis and found no difference (η<sup>2</sup> = stat) in median flooded wetland area (m<sup>2</sup>) across water year classification (wet, above normal, below normal, dry, critical drought) (Kruskal-Wallis test, 𝜒<sup>2</sup>(2)= stat, p = 0.12, ⍺ = significance level).</p>
 </section>
 <section id="d." class="level2">
 <h2 class="anchored" data-anchor-id="d.">d.</h2>
+<p>An additional variable that could influence the flooded area of a wetland is water management for wetlands. This is a binary categorical variable (managed vs un-managed). If management actions are taken, such as pumping water or using control gates, this will</p>
 </section>
 </section>
 <section id="problem-2.-data-visualization" class="level1">
 <h1>Problem 2. Data visualization</h1>
 <section id="a.-1" class="level2">
 <h2 class="anchored" data-anchor-id="a.-1">a.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>kelp_clean <span class="ot">&lt;-</span> kelp <span class="sc">|&gt;</span> <span class="co">#create new object kelp_clean</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span>  <span class="co">#clean up column names (all lowercase and underscores not spaces)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(site <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"IVEE"</span>, <span class="st">"NAPL"</span>, <span class="st">"CARP"</span>)) <span class="sc">|&gt;</span> <span class="co">#selects only data from these 3 sites</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(date <span class="sc">==</span> <span class="st">"2000-09-22"</span> <span class="sc">&amp;</span> transect <span class="sc">==</span> <span class="st">"6"</span> <span class="sc">&amp;</span> quad <span class="sc">==</span> <span class="st">"40"</span>)) <span class="sc">|&gt;</span> <span class="co">#removes a specific observation (probably bad data or an error in collection)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">site_name =</span> <span class="fu">case_when</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  site <span class="sc">==</span> <span class="st">"NAPL"</span> <span class="sc">~</span> <span class="st">"Naples"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  site <span class="sc">==</span> <span class="st">"IVEE"</span> <span class="sc">~</span> <span class="st">"Isla Vista"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  site <span class="sc">==</span> <span class="st">"CARP"</span> <span class="sc">~</span> <span class="st">"Carpinteria"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)) <span class="sc">|&gt;</span> <span class="co">#creates a new column and changes site codes into names</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">site_name =</span> <span class="fu">as_factor</span>(site_name),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">site_name =</span> <span class="fu">fct_relevel</span>(site_name,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Naples"</span>, <span class="st">"Isla Vista"</span>, <span class="st">"Carpinteria"</span>)) <span class="sc">|&gt;</span> <span class="co">#changes site_name to a factor and sets the order of site levels </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site_name, year) <span class="sc">|&gt;</span> <span class="co">#groups data by site and year for summary calculations </span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_fronds =</span> <span class="fu">mean</span>(fronds)) <span class="sc">|&gt;</span> <span class="co">#calculates the mean number of fronds for each site/year group </span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="co">#ungroups data so the data frame can be used normally after </span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(kelp_clean, <span class="at">n =</span> <span class="dv">5</span>) <span class="co">#randomly displays 5 observations (rows) from the dataset </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  site_name   year mean_fronds
+  &lt;fct&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+1 Naples      2020        7.55
+2 Isla Vista  2015        8.03
+3 Isla Vista  2023        6.55
+4 Naples      2016        5.93
+5 Naples      2019        4.23</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(kelp_clean) <span class="co">#shows the structure of the data frame (variables, data types, and size)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [51 × 3] (S3: tbl_df/tbl/data.frame)
+ $ site_name  : Factor w/ 3 levels "Naples","Isla Vista",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ year       : num [1:51] 2008 2009 2010 2011 2012 ...
+ $ mean_fronds: num [1:51] -1.25e+04 8.46e-01 4.10 6.99 7.49 ...</code></pre>
+</div>
+</div>
 </section>
 <section id="b.-1" class="level2">
 <h2 class="anchored" data-anchor-id="b.-1">b.</h2>
+<p>The code chunk above includes a line that filters out frond observations from the date <code>2000-09-22</code> in transect 6 in quad 40.</p>
+<p>In 1-2 sentences, describe why. What is the number for the value of fronds in that “quad” in that “transect”? What does that value represent? Reference the specific place you found information on what that value represents (e.g.&nbsp;in the Summary tab of the data page).</p>
 </section>
 <section id="c.-1" class="level2">
 <h2 class="anchored" data-anchor-id="c.-1">c.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> kelp_clean, <span class="co">#ggplot call with kelp_clean data frame</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="co">#year to the x-axis</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> mean_fronds, <span class="co">#mean_fronds to y-axis</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> site_name)) <span class="sc">+</span>  <span class="co">#colors each data by site_name</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#adds points at each observation to graph </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="co">#connects data points with a line</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="co">#assigns colors to each site </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Naples"</span> <span class="ot">=</span> <span class="st">"deeppink4"</span>, </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Isla Vista"</span> <span class="ot">=</span> <span class="st">"slateblue4"</span>, </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Carpinteria"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>)) <span class="sc">+</span> </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sites vary in mean kelp fronds per year"</span>, <span class="co">#adds graph title</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>, <span class="co">#makes x-axis title</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean kelp fronds per year"</span>, <span class="co">#makes y-axis title</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Site"</span> <span class="co">#adds title to legened </span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="co">#changes theme of graph</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="script_files/figure-html/recreating%20visualization-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="d.-1" class="level2">
 <h2 class="anchored" data-anchor-id="d.-1">d.</h2>
+<p>Isla Vista is the site that shows the most variable mean kelp fronds per year due to .</p>
+<p>Carpinteria shows the least variable mean kelp fronds per year by the .</p>
 </section>
 </section>
 <section id="problem-3.-data-analysis" class="level1">
 <h1>Problem 3. Data analysis</h1>
 <section id="a.-2" class="level2">
 <h2 class="anchored" data-anchor-id="a.-2">a.</h2>
+<p>In 1-2 sentences, explain what the 1s and 0s mean in this data set biologically.</p>
 </section>
 <section id="b.-2" class="level2">
 <h2 class="anchored" data-anchor-id="b.-2">b.</h2>
+<p>In this problem, you will be examining the potential effects of <em>visual obstruction</em> and <em>distance to prairie dog colony edge</em> on the probability of a nest site being occupied by a Mountain Plover.</p>
+<p>In 2-3 sentences for each predictor, describe:</p>
+<ul>
+<li><p>what kind of variable it is (i.e.&nbsp;continuous, discrete, categorical, etc.),</p></li>
+<li><p>how it could possibly influence the probability of Mountain Plover nest site use (i.e.&nbsp;as visual obstruction increases, the probability of Mountain Plover nest site use would ______________ because…), and</p></li>
+<li><p>where in the paper you found this information (the specific section, subsection, and paragraph)</p></li>
+</ul>
 </section>
 <section id="c.-2" class="level2">
 <h2 class="anchored" data-anchor-id="c.-2">c.</h2>
+<p>Make a table of all the models you will need to run. You will run 4 models: a null model, a saturated model, and two other models with different combinations of predictors.</p>
+<p>Stuck on how to create a table? See workshop 8 for an example.</p>
+<p>Your table should have 4 columns: (1) model number, (2) visual obstruction, (3) distance to prairie dog colony, and (4) model description.</p>
 </section>
 <section id="d.-2" class="level2">
 <h2 class="anchored" data-anchor-id="d.-2">d.</h2>
+<p>Create a clean dataset to use called <code>mopl_clean</code>. In no particular order:</p>
+<ul>
+<li><p>clean the column names</p></li>
+<li><p>create a new column called <code>used_bin</code> to create 1s and 0s from the <code>id</code> column</p></li>
+<li><p>select <code>used_bin</code>, <code>edgedist</code>, and <code>vo_nest</code></p></li>
+</ul>
+<p>edited 2026-03-11: included instructions for cleaning data</p>
+<p>Then, write your code to run all your models. Do not display any output.</p>
 </section>
 <section id="e." class="level2">
 <h2 class="anchored" data-anchor-id="e.">e.</h2>
+<p>Create a clean dataset to use called <code>mopl_clean</code>. In no particular order:</p>
+<ul>
+<li><p>clean the column names</p></li>
+<li><p>create a new column called <code>used_bin</code> to create 1s and 0s from the <code>id</code> column</p></li>
+<li><p>select <code>used_bin</code>, <code>edgedist</code>, and <code>vo_nest</code></p></li>
+</ul>
+<p>edited 2026-03-11: included instructions for cleaning data</p>
+<p>Then, write your code to run all your models. Do not display any output.</p>
 </section>
 <section id="f." class="level2">
 <h2 class="anchored" data-anchor-id="f.">f.</h2>
+<p>Check your diagnostics for the model you selected using simulated residuals from the <code>DHARMa</code> package.</p>
+<p>Display all code and output.</p>
 </section>
 <section id="g." class="level2">
 <h2 class="anchored" data-anchor-id="g.">g.</h2>
+<p>Create a plot showing model predictions <em>for your selected model</em> with 95% confidence intervals around the predictions and the underlying data.</p>
+<p>Show and annotate all code. Show the output.</p>
+<p>For full credit:</p>
+<ul>
+<li><p>make sure the x- and y-axis labels are written in full with units if necessary</p></li>
+<li><p>take out the gridlines</p></li>
+<li><p>use colors that are different from the default</p></li>
+</ul>
 </section>
 <section id="h." class="level2">
 <h2 class="anchored" data-anchor-id="h.">h.</h2>
+<p>Include a figure number, title, description of the figure, and data citation.</p>
 </section>
 <section id="i." class="level2">
 <h2 class="anchored" data-anchor-id="i.">i.</h2>
+<p>Calculate the predicted probability of Mountain Plover nest site occupancy at 0 on the index of visual obstruction.</p>
+<p>Show and annotate all code. Display the output.</p>
 </section>
 <section id="j." class="level2">
 <h2 class="anchored" data-anchor-id="j.">j.</h2>
+<p>Write 3-5 sentences summarizing what you found, making references to the figure you made in part h and the predictions you calculated in part j. Your summary should include your interpretation of:</p>
+<ul>
+<li><p>the predicted probability of nest site occupancy at 0 (no visual obstruction)</p></li>
+<li><p>what relationships, if any, exist between visual obstruction and distance to prairie dog colony and probability of occupancy</p></li>
+<li><p>the biology behind the trends you found - what explains the relationship between visual obstruction and probability of Mountain Plover nest site occupancy?</p></li>
+</ul>
 </section>
 </section>
 <section id="problem-4.-affective-and-exploratory-visualization" class="level1">

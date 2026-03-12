@@ -29,7 +29,7 @@ library(ggeffects)
 library(readr)
 
 #read in data here
-kelp <- read_csv("data/SBS_Kelp_All_Years_20250225.csv")
+kelp <- read_csv("../data/SBS_Kelp_All_Years_20250225.csv")
 ```
 
 # Problem 1. Research writing
@@ -85,31 +85,132 @@ str(kelp_clean) #shows the structure of the data frame (variables, data types, a
 
 ## b.
 
+The code chunk above includes a line that filters out frond observations from the date `2000-09-22` in transect 6 in quad 40.
+
+In 1-2 sentences, describe why. What is the number for the value of fronds in that “quad” in that “transect”? What does that value represent? Reference the specific place you found information on what that value represents (e.g. in the Summary tab of the data page).
+
 ## c.
 
+```{r}
+#| label: recreating visualization
+ggplot(data = kelp_clean, #ggplot call with kelp_clean data frame
+       aes(x = year, #year to the x-axis
+           y = mean_fronds, #mean_fronds to y-axis
+           color = site_name)) +  #colors each data by site_name
+  geom_point() + #adds points at each observation to graph 
+  geom_line() + #connects data points with a line
+  scale_color_manual(values = c( #assigns colors to each site 
+    "Naples" = "deeppink4", 
+    "Isla Vista" = "slateblue4", 
+    "Carpinteria" = "darkgreen")) + 
+  labs(
+    title = "Sites vary in mean kelp fronds per year", #adds graph title
+    x = "Year", #makes x-axis title
+    y = "Mean kelp fronds per year", #makes y-axis title
+    color = "Site" #adds title to legened 
+  ) + 
+  theme_minimal() #changes theme of graph
+```
+
 ## d.
+
+Isla Vista is the site that shows the most variable mean kelp fronds per year due to .
+
+Carpinteria shows the least variable mean kelp fronds per year by the .
 
 # Problem 3. Data analysis
 
 ## a.
 
+In 1-2 sentences, explain what the 1s and 0s mean in this data set biologically.
+
 ## b.
+
+In this problem, you will be examining the potential effects of *visual obstruction* and *distance to prairie dog colony edge* on the probability of a nest site being occupied by a Mountain Plover.
+
+In 2-3 sentences for each predictor, describe:
+
+-   what kind of variable it is (i.e. continuous, discrete, categorical, etc.),
+
+-   how it could possibly influence the probability of Mountain Plover nest site use (i.e. as visual obstruction increases, the probability of Mountain Plover nest site use would \_\_\_\_\_\_\_\_\_\_\_\_\_\_ because…), and
+
+-   where in the paper you found this information (the specific section, subsection, and paragraph)
 
 ## c.
 
+Make a table of all the models you will need to run. You will run 4 models: a null model, a saturated model, and two other models with different combinations of predictors.
+
+Stuck on how to create a table? See workshop 8 for an example.
+
+Your table should have 4 columns: (1) model number, (2) visual obstruction, (3) distance to prairie dog colony, and (4) model description.
+
 ## d.
+
+Create a clean dataset to use called `mopl_clean`. In no particular order:
+
+-   clean the column names
+
+-   create a new column called `used_bin` to create 1s and 0s from the `id` column
+
+-   select `used_bin`, `edgedist`, and `vo_nest`
+
+edited 2026-03-11: included instructions for cleaning data
+
+Then, write your code to run all your models. Do not display any output.
 
 ## e.
 
+Create a clean dataset to use called `mopl_clean`. In no particular order:
+
+-   clean the column names
+
+-   create a new column called `used_bin` to create 1s and 0s from the `id` column
+
+-   select `used_bin`, `edgedist`, and `vo_nest`
+
+edited 2026-03-11: included instructions for cleaning data
+
+Then, write your code to run all your models. Do not display any output.
+
 ## f.
+
+Check your diagnostics for the model you selected using simulated residuals from the `DHARMa` package.
+
+Display all code and output.
 
 ## g.
 
+Create a plot showing model predictions *for your selected model* with 95% confidence intervals around the predictions and the underlying data.
+
+Show and annotate all code. Show the output.
+
+For full credit:
+
+-   make sure the x- and y-axis labels are written in full with units if necessary
+
+-   take out the gridlines
+
+-   use colors that are different from the default
+
 ## h.
+
+Include a figure number, title, description of the figure, and data citation.
 
 ## i.
 
+Calculate the predicted probability of Mountain Plover nest site occupancy at 0 on the index of visual obstruction.
+
+Show and annotate all code. Display the output.
+
 ## j.
+
+Write 3-5 sentences summarizing what you found, making references to the figure you made in part h and the predictions you calculated in part j. Your summary should include your interpretation of:
+
+-   the predicted probability of nest site occupancy at 0 (no visual obstruction)
+
+-   what relationships, if any, exist between visual obstruction and distance to prairie dog colony and probability of occupancy
+
+-   the biology behind the trends you found - what explains the relationship between visual obstruction and probability of Mountain Plover nest site occupancy?
 
 # Problem 4. Affective and exploratory visualization
 
