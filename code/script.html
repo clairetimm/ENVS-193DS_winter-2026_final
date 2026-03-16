@@ -87,21 +87,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#set-up" id="toc-set-up" class="nav-link active" data-scroll-target="#set-up">Set Up</a></li>
   <li><a href="#problem-1.-research-writing" id="toc-problem-1.-research-writing" class="nav-link" data-scroll-target="#problem-1.-research-writing">Problem 1. Research writing</a>
   <ul class="collapse">
-  <li><a href="#a." id="toc-a." class="nav-link" data-scroll-target="#a.">a.</a></li>
+  <li><a href="#a.-read-words-and-what-the-metric-of-central-tendency" id="toc-a.-read-words-and-what-the-metric-of-central-tendency" class="nav-link" data-scroll-target="#a.-read-words-and-what-the-metric-of-central-tendency">a. <u>READ WORDS AND WHAT THE METRIC OF CENTRAL TENDENCY!!!</u></a></li>
   <li><a href="#b." id="toc-b." class="nav-link" data-scroll-target="#b.">b.</a></li>
   <li><a href="#c." id="toc-c." class="nav-link" data-scroll-target="#c.">c.</a></li>
   <li><a href="#d." id="toc-d." class="nav-link" data-scroll-target="#d.">d.</a></li>
   </ul></li>
   <li><a href="#problem-2.-data-visualization" id="toc-problem-2.-data-visualization" class="nav-link" data-scroll-target="#problem-2.-data-visualization">Problem 2. Data visualization</a>
   <ul class="collapse">
-  <li><a href="#a.-1" id="toc-a.-1" class="nav-link" data-scroll-target="#a.-1">a.</a></li>
+  <li><a href="#a." id="toc-a." class="nav-link" data-scroll-target="#a.">a.</a></li>
   <li><a href="#b.-1" id="toc-b.-1" class="nav-link" data-scroll-target="#b.-1">b.</a></li>
   <li><a href="#c.-1" id="toc-c.-1" class="nav-link" data-scroll-target="#c.-1">c.</a></li>
   <li><a href="#d.-1" id="toc-d.-1" class="nav-link" data-scroll-target="#d.-1">d.</a></li>
   </ul></li>
   <li><a href="#problem-3.-data-analysis" id="toc-problem-3.-data-analysis" class="nav-link" data-scroll-target="#problem-3.-data-analysis">Problem 3. Data analysis</a>
   <ul class="collapse">
-  <li><a href="#a.-2" id="toc-a.-2" class="nav-link" data-scroll-target="#a.-2">a.</a></li>
+  <li><a href="#a.-1" id="toc-a.-1" class="nav-link" data-scroll-target="#a.-1">a.</a></li>
   <li><a href="#b.-2" id="toc-b.-2" class="nav-link" data-scroll-target="#b.-2">b.</a></li>
   <li><a href="#c.-2" id="toc-c.-2" class="nav-link" data-scroll-target="#c.-2">c.</a></li>
   <li><a href="#d.-2" id="toc-d.-2" class="nav-link" data-scroll-target="#d.-2">d.</a></li>
@@ -114,13 +114,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#problem-4.-affective-and-exploratory-visualization" id="toc-problem-4.-affective-and-exploratory-visualization" class="nav-link" data-scroll-target="#problem-4.-affective-and-exploratory-visualization">Problem 4. Affective and exploratory visualization</a>
   <ul class="collapse">
-  <li><a href="#a.-3" id="toc-a.-3" class="nav-link" data-scroll-target="#a.-3">a.</a></li>
+  <li><a href="#a.-2" id="toc-a.-2" class="nav-link" data-scroll-target="#a.-2">a.</a></li>
   <li><a href="#b.-3" id="toc-b.-3" class="nav-link" data-scroll-target="#b.-3">b.</a></li>
-  <li><a href="#c.-3" id="toc-c.-3" class="nav-link" data-scroll-target="#c.-3">c.</a></li>
+  <li><a href="#c.-3" id="toc-c.-3" class="nav-link" data-scroll-target="#c.-3">c.</a>
+  <ul class="collapse">
+  <li><a href="#check-assumptions" id="toc-check-assumptions" class="nav-link" data-scroll-target="#check-assumptions">Check assumptions</a></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a></li>
+  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size">Effect size</a></li>
+  </ul></li>
   <li><a href="#d.-3" id="toc-d.-3" class="nav-link" data-scroll-target="#d.-3">d.</a></li>
   <li><a href="#e.-1" id="toc-e.-1" class="nav-link" data-scroll-target="#e.-1">e.</a></li>
   <li><a href="#f.-1" id="toc-f.-1" class="nav-link" data-scroll-target="#f.-1">f.</a></li>
-  <li><a href="#g.-1" id="toc-g.-1" class="nav-link" data-scroll-target="#g.-1">g.</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -170,13 +174,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#read in data here</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>kelp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/SBS_Kelp_All_Years_20250225.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>kelp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/annual_kelp.csv"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>mopl <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/MOPL_nest.csv"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/mydata.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="problem-1.-research-writing" class="level1">
 <h1>Problem 1. Research writing</h1>
-<section id="a." class="level2">
-<h2 class="anchored" data-anchor-id="a.">a.</h2>
+<section id="a.-read-words-and-what-the-metric-of-central-tendency" class="level2">
+<h2 class="anchored" data-anchor-id="a.-read-words-and-what-the-metric-of-central-tendency">a. <u>READ WORDS AND WHAT THE METRIC OF CENTRAL TENDENCY!!!</u></h2>
 <p>In part one the researchers used a linear regression test to determine whether precipitation predicts flooded wetland area. This is because both variables are continuous, the predictor variable is precipitation and the response variable is flooded wetland area (m<sup>2</sup>).</p>
 <p>In the second part, my coworker likely used a Kruskal-Wallis test to evaluate if median flooded wetland area differs across water year classifications. This test is used to compare medians across more than two groups, in this study the groups were wet, above normal, below normal, dry, or critical drought.</p>
 </section>
@@ -196,8 +202,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="problem-2.-data-visualization" class="level1">
 <h1>Problem 2. Data visualization</h1>
-<section id="a.-1" class="level2">
-<h2 class="anchored" data-anchor-id="a.-1">a.</h2>
+<section id="a." class="level2">
+<h2 class="anchored" data-anchor-id="a.">a.</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>kelp_clean <span class="ot">&lt;-</span> kelp <span class="sc">|&gt;</span> <span class="co">#create new object kelp_clean</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span>  <span class="co">#clean up column names (all lowercase and underscores not spaces)</span></span>
@@ -218,20 +224,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(kelp_clean, <span class="at">n =</span> <span class="dv">5</span>) <span class="co">#randomly displays 5 observations (rows) from the dataset </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
-  site_name   year mean_fronds
-  &lt;fct&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-1 Naples      2020        7.55
-2 Isla Vista  2015        8.03
-3 Isla Vista  2023        6.55
-4 Naples      2016        5.93
-5 Naples      2019        4.23</code></pre>
+  site_name    year mean_fronds
+  &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+1 Naples       2019        4.47
+2 Carpinteria  2010        3.53
+3 Carpinteria  2012       16.6 
+4 Carpinteria  2009        9.43
+5 Naples       2013        9.20</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(kelp_clean) <span class="co">#shows the structure of the data frame (variables, data types, and size)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>tibble [51 × 3] (S3: tbl_df/tbl/data.frame)
+<pre><code>tibble [77 × 3] (S3: tbl_df/tbl/data.frame)
  $ site_name  : Factor w/ 3 levels "Naples","Isla Vista",..: 1 1 1 1 1 1 1 1 1 1 ...
- $ year       : num [1:51] 2008 2009 2010 2011 2012 ...
- $ mean_fronds: num [1:51] -1.25e+04 8.46e-01 4.10 6.99 7.49 ...</code></pre>
+ $ year       : num [1:77] 2000 2001 2002 2003 2004 ...
+ $ mean_fronds: num [1:77] 1.8947 0.0606 3.0111 9.2596 7.8141 ...</code></pre>
 </div>
 </div>
 </section>
@@ -239,6 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="b.-1">b.</h2>
 <p>The code chunk above includes a line that filters out frond observations from the date <code>2000-09-22</code> in transect 6 in quad 40.</p>
 <p>In 1-2 sentences, describe why. What is the number for the value of fronds in that “quad” in that “transect”? What does that value represent? Reference the specific place you found information on what that value represents (e.g.&nbsp;in the Summary tab of the data page).</p>
+<p>The certain code chunk is filtered out due to the missing datasheet. In transect 6, quad 40,</p>
 </section>
 <section id="c.-1" class="level2">
 <h2 class="anchored" data-anchor-id="c.-1">c.</h2>
@@ -259,7 +266,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean kelp fronds per year"</span>, <span class="co">#makes y-axis title</span></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Site"</span> <span class="co">#adds title to legened </span></span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="co">#changes theme of graph</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="co">#changes theme of graph</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="co">#centers graph title</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -277,9 +287,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="problem-3.-data-analysis" class="level1">
 <h1>Problem 3. Data analysis</h1>
-<section id="a.-2" class="level2">
-<h2 class="anchored" data-anchor-id="a.-2">a.</h2>
+<section id="a.-1" class="level2">
+<h2 class="anchored" data-anchor-id="a.-1">a.</h2>
 <p>In 1-2 sentences, explain what the 1s and 0s mean in this data set biologically.</p>
+<p>The 1s mean while the 0s mean .</p>
 </section>
 <section id="b.-2" class="level2">
 <h2 class="anchored" data-anchor-id="b.-2">b.</h2>
@@ -305,7 +316,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>create a new column called <code>used_bin</code> to create 1s and 0s from the <code>id</code> column</p></li>
 <li><p>select <code>used_bin</code>, <code>edgedist</code>, and <code>vo_nest</code></p></li>
 </ul>
-<p>edited 2026-03-11: included instructions for cleaning data</p>
 <p>Then, write your code to run all your models. Do not display any output.</p>
 </section>
 <section id="e." class="level2">
@@ -356,14 +366,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="problem-4.-affective-and-exploratory-visualization" class="level1">
 <h1>Problem 4. Affective and exploratory visualization</h1>
-<section id="a.-3" class="level2">
-<h2 class="anchored" data-anchor-id="a.-3">a.</h2>
+<section id="a.-2" class="level2">
+<h2 class="anchored" data-anchor-id="a.-2">a.</h2>
+<ul>
+<li><p>How are the visualizations different from each other in the way you have represented your data?</p>
+<ul>
+<li>In my Homework 2 exploratory visualization, my data is represented in a factual way that is easy to interpret due to the graph title, axis labels, and different colors for each day of the week, so viewers are able to read the histogram and get a summary of my data. Meanwhile in Homework 3 for my affective visualization, this is a much more abstract form of a visualization, so without my artist statement it would be hard to interpret. Also I created it from my real data but viewers wouldn’t be able to get specific data values from looking at it.</li>
+</ul></li>
+<li><p>What similarities do you see between all your visualizations?</p>
+<ul>
+<li>Between all my visualizations I can see that Tuesdays on average tend to have the lowest sleep duration, while Monday and Wednesday on average have the most. Additionally I noticed a few outliers on my screen time vs sleep duration plot, but there potentially is a trend for higher sleep duration with a lower screen time.</li>
+</ul></li>
+<li><p>What patterns (e.g.&nbsp;differences in means/counts/proportions/medians, trends through time, relationships between variables) do you see in each visualization? Are these different between visualizations? If so, why? If not, why not?</p>
+<ul>
+<li>I noticed that in the affective visualization it was difficult to .</li>
+</ul></li>
+<li><p>What kinds of feedback did you get during week 9 in workshop or from the instructors? How did you implement or try those suggestions? If you tried and kept those suggestions, explain how and why; if not, explain why not.</p>
+<ul>
+<li>I received feedback on which colors of yarn to use for my crochet visualization. I took the advice of doing white to represent my sleep duration and found a fluffy type of yarn that reminded me of a blanket. Then for screen time I used a green because I thought the color was pretty, it would stand out, and found it in the same texture as the white one. I took the feedback of instead of using the same color but in two different shades to finding two completely different colors of yarn.</li>
+</ul></li>
+</ul>
 </section>
 <section id="b.-3" class="level2">
 <h2 class="anchored" data-anchor-id="b.-3">b.</h2>
+<p>Based on my predictor variable of daily screen time (minutes) and the response variable, sleep duration (minutes), I could conduct a linear regression analysis to determine the strength, direction, and significance between the two variables. I could figure out if higher amounts of screen time are related to shorter sleep duration since linear regression models the relationship between two variables and since both my predictor and response variable are continuous, measured in minutes, this test will work for quantitative data. Overall this analysis will let me assess if increased screen time will predict changes to sleep duration and allow me to quantify this relationship.</p>
 </section>
 <section id="c.-3" class="level2">
 <h2 class="anchored" data-anchor-id="c.-3">c.</h2>
+<section id="check-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="check-assumptions">Check assumptions</h3>
+<p>Before I fit a model:</p>
+<ol type="1">
+<li><p>Linear relationship between response and predictor variables</p>
+<p>Yes, I would expect a linear relationship between my X variable, screen time (minutes), and my Y variable, sleep duration (minutes). As screen time increases I would expect sleep duration to decrease.</p></li>
+<li><p>Independent error (no correlation between errors)</p>
+<p>An error from one observation will not influence an error from another observation since both variables are their own observation and it is made daily.</p></li>
+</ol>
+<p>After I fit my model:</p>
+<ol type="1">
+<li>Homoscedasticity of residuals (constant variance)</li>
+<li>Normally distributed residuals</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#clean data </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>my_data_clean <span class="ot">&lt;-</span> my_data <span class="sc">|&gt;</span>  </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#fit the regression model </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(sleep_duration_minutes <span class="sc">~</span> screen_time_minutes, <span class="at">data =</span> my_data_clean)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># base R residuals </span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span> (<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="script_files/figure-html/diagnostic%20plots-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis" class="level3">
+<h3 class="anchored" data-anchor-id="analysis">Analysis</h3>
+<p>Residuals vs Fitted: This plot checks if there is a linear relationship between the predictor variable, screen time, and the response variable, sleep duration. The residuals appear to be scattered somewhat evenly and randomly around the horizontal line without a strong curved pattern, although there is a slight trend in the red line showing small deviations. Overall the linearity assumption is reasonably statisfied.</p>
+<p>QQ Residuals: This plot checks whether the residuals follow a normal distribution. Since most of the data points fall along the reference line, with the exception of a few, this indicates that the resiudals are normally distributed.</p>
+<p>Scale-Location: This plot checks the assumption of homoscedasticity as well but with the square root of the standardized residuals. The points appear to be relatively evenly spread across the fitted values, suggesting that the variance of residuals is mostly constant so the homoscedasticity assumption is met.</p>
+<p>Residuals vs Leverage: This plot identifies any potential outliers that could affect the regression model using Cook’s distance. While some observations appear to be higher than others, none appear to have extremely high influence on the model since they fall within the dashed lines, concluding there are no outliers.</p>
+</section>
+<section id="effect-size" class="level3">
+<h3 class="anchored" data-anchor-id="effect-size">Effect size</h3>
+</section>
 </section>
 <section id="d.-3" class="level2">
 <h2 class="anchored" data-anchor-id="d.-3">d.</h2>
@@ -373,9 +444,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="f.-1" class="level2">
 <h2 class="anchored" data-anchor-id="f.-1">f.</h2>
-</section>
-<section id="g.-1" class="level2">
-<h2 class="anchored" data-anchor-id="g.-1">g.</h2>
 </section>
 </section>
 

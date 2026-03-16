@@ -29,8 +29,9 @@ library(ggeffects)
 library(readr)
 
 #read in data here
-kelp <- read_csv("data/Annual_Kelp_All_Years_20250903.csv")
-mopl <- read_csv("data/MOPL_nest.csv")
+kelp <- read_csv("../data/annual_kelp.csv")
+mopl <- read_csv("../data/MOPL_nest.csv")
+my_data <- read_csv("../data/mydata.csv")
 ```
 
 # Problem 1. Research writing
@@ -162,8 +163,6 @@ Create a clean dataset to use called `mopl_clean`. In no particular order:
 
 -   select `used_bin`, `edgedist`, and `vo_nest`
 
-edited 2026-03-11: included instructions for cleaning data
-
 Then, write your code to run all your models. Do not display any output.
 
 ## e.
@@ -252,7 +251,7 @@ Before I fit a model:
 
 1.  Linear relationship between response and predictor variables
 
-    Yes, I would expect a linear relationship between my X variable, screen time (minutes), and my Y variable, sleep duration (minutes).
+    Yes, I would expect a linear relationship between my X variable, screen time (minutes), and my Y variable, sleep duration (minutes). As screen time increases I would expect sleep duration to decrease.
 
 2.  Independent error (no correlation between errors)
 
@@ -260,22 +259,82 @@ Before I fit a model:
 
 After I fit my model:
 
-1.  Homoscedasticity of error (constant variance)
+1.  Homoscedasticity of residuals (constant variance)
+2.  Normally distributed residuals
 
-    (Error should be the same throughout the range of predictor values in the model)
+```{r}
+#| label: diagnostic plots
+#clean data 
+my_data_clean <- my_data |>  
+  clean_names()
+#fit the regression model 
+model <- lm(sleep_duration_minutes ~ screen_time_minutes, data = my_data_clean)
+# base R residuals 
+par(mfrow = c (2, 2))
+plot(model)
+summary(model)
+```
 
-2.  Normally distributed error
+[Residuals vs Fitted]{.underline}: This plot checks if there is a linear relationship between the predictor variable, screen time, and the response variable, sleep duration. The residuals appear to be scattered somewhat evenly and randomly around the horizontal line without a strong curved pattern, although there is a slight trend in the red line showing small deviations. Overall the linearity assumption is reasonably statisfied.
 
-    (Error should be normally distributed)
+[QQ Residuals]{.underline}: This plot checks whether the residuals follow a normal distribution. Since most of the data points fall along the reference line, with the exception of a few, this indicates that the resiudals are normally distributed.
+
+[Scale-Location]{.underline}: This plot checks the assumption of homoscedasticity as well but with the square root of the standardized residuals. The points appear to be relatively evenly spread across the fitted values, suggesting that the variance of residuals is mostly constant so the homoscedasticity assumption is met.
+
+[Residuals vs Leverage]{.underline}: This plot identifies any potential outliers that could affect the regression model using Cook's distance. While some observations appear to be higher than others, none appear to have extremely high influence on the model since they fall within the dashed lines, concluding there are no outliers.
 
 ### Analysis
 
-### (if applicable) Effect size
+To assess the relationship between screen time (minutes), the predictor variable, and sleep duration (minutes), the response variable, I conducted a simple linear regression analysis. The regression results showed that the estimated intercept is 339.54, which is the predicted sleep duration when screen time is 0. The slope coefficient for screen time is 0.348, meaning that for every increase in 1 minutes of screen time, the predicted sleep duration increases by 0.35 minutes on average. Although the p-value for screen time coefficient is 0.163, which is greater than the significance level of 0.05, indicating a relationship that is not statistically significant.
+
+The F-statistic is 3.04
+
+### Effect size
+
+The R^2^ indicates the proportion of variance in the response variable by the predictor variable. For this model, the R^2^ value is 0.0618 which means that 6.18% of the variation in sleep duration is explained by screen time, a small effect size.
 
 ## d.
 
+```{r}
+#| label: predictions
+data_pred <- ggpredict(
+  model,
+  terms = "screen_time_minutes"
+)
+data_pred
+```
+
+```{r}
+#| label: visualization
+ggplot(data = my_data_clean,
+       aes(x = screen_time_minutes,
+           y = sleep_duration_minutes)) + 
+  geom_point(size = 3,
+             stroke = 1,
+             fill = "purple4",
+             shape = 23) +
+  geom_ribbon(data = data_pred,
+              aes(x = x,
+                  y = predicted,
+                  ymin = conf.low,
+                  ymax = conf.high),
+              alpha = 0.2) + 
+  geom_line(data = data_pred,
+            aes(x = x,
+                y = predicted),
+            linewidth = 1) + 
+  labs(x = "Screen time (minutes)",
+       y = "Sleep duration (minutes)",
+       title = "Screen Time vs Sleep Duartion") + 
+  theme_minimal()
+```
+
 ## e.
+
+Write a caption for the figure you created in part d. Include a figure number, title, description of visual components (including but not limited to shapes, colors, lines, etc.)
 
 ## f.
 
-## g.
+In 2-4 sentences, write about your results (with appropriate components in the parenthetical statistical summary).
+
+Include any components that would provide additional context to your interpretation (e.g. differences in means) or allow you to quantify the magnitude of effects (e.g. effect sizes).
