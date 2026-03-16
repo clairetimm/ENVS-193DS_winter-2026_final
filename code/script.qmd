@@ -29,12 +29,13 @@ library(ggeffects)
 library(readr)
 
 #read in data here
-kelp <- read_csv("../data/SBS_Kelp_All_Years_20250225.csv")
+kelp <- read_csv("data/Annual_Kelp_All_Years_20250903.csv")
+mopl <- read_csv("data/MOPL_nest.csv")
 ```
 
 # Problem 1. Research writing
 
-## a.
+## a. [READ WORDS AND WHAT THE METRIC OF CENTRAL TENDENCY!!!]{.underline}
 
 In part one the researchers used a linear regression test to determine whether precipitation predicts flooded wetland area. This is because both variables are continuous, the predictor variable is precipitation and the response variable is flooded wetland area (m^2^).
 
@@ -89,6 +90,8 @@ The code chunk above includes a line that filters out frond observations from th
 
 In 1-2 sentences, describe why. What is the number for the value of fronds in that “quad” in that “transect”? What does that value represent? Reference the specific place you found information on what that value represents (e.g. in the Summary tab of the data page).
 
+The certain code chunk is filtered out due to the missing datasheet. In transect 6, quad 40,
+
 ## c.
 
 ```{r}
@@ -109,7 +112,10 @@ ggplot(data = kelp_clean, #ggplot call with kelp_clean data frame
     y = "Mean kelp fronds per year", #makes y-axis title
     color = "Site" #adds title to legened 
   ) + 
-  theme_minimal() #changes theme of graph
+  theme_minimal() + #changes theme of graph
+  theme(
+    plot.title = element_text(hjust = 0.5) #centers graph title
+  )
 ```
 
 ## d.
@@ -123,6 +129,8 @@ Carpinteria shows the least variable mean kelp fronds per year by the .
 ## a.
 
 In 1-2 sentences, explain what the 1s and 0s mean in this data set biologically.
+
+The 1s mean while the 0s mean .
 
 ## b.
 
@@ -216,9 +224,53 @@ Write 3-5 sentences summarizing what you found, making references to the figure 
 
 ## a.
 
+-   How are the visualizations different from each other in the way you have represented your data?
+
+    -   In my Homework 2 exploratory visualization, my data is represented in a factual way that is easy to interpret due to the graph title, axis labels, and different colors for each day of the week, so viewers are able to read the histogram and get a summary of my data. Meanwhile in Homework 3 for my affective visualization, this is a much more abstract form of a visualization, so without my artist statement it would be hard to interpret. Also I created it from my real data but viewers wouldn't be able to get specific data values from looking at it.
+
+-   What similarities do you see between all your visualizations?
+
+    -   Between all my visualizations I can see that Tuesdays on average tend to have the lowest sleep duration, while Monday and Wednesday on average have the most. Additionally I noticed a few outliers on my screen time vs sleep duration plot, but there potentially is a trend for higher sleep duration with a lower screen time.
+
+-   What patterns (e.g. differences in means/counts/proportions/medians, trends through time, relationships between variables) do you see in each visualization? Are these different between visualizations? If so, why? If not, why not?
+
+    -   I noticed that in the affective visualization it was difficult to .
+
+-   What kinds of feedback did you get during week 9 in workshop or from the instructors? How did you implement or try those suggestions? If you tried and kept those suggestions, explain how and why; if not, explain why not.
+
+    -   I received feedback on which colors of yarn to use for my crochet visualization. I took the advice of doing white to represent my sleep duration and found a fluffy type of yarn that reminded me of a blanket. Then for screen time I used a green because I thought the color was pretty, it would stand out, and found it in the same texture as the white one. I took the feedback of instead of using the same color but in two different shades to finding two completely different colors of yarn.
+
 ## b.
 
+Based on my predictor variable of daily screen time (minutes) and the response variable, sleep duration (minutes), I could conduct a linear regression analysis to determine the strength, direction, and significance between the two variables. I could figure out if higher amounts of screen time are related to shorter sleep duration since linear regression models the relationship between two variables and since both my predictor and response variable are continuous, measured in minutes, this test will work for quantitative data. Overall this analysis will let me assess if increased screen time will predict changes to sleep duration and allow me to quantify this relationship.
+
 ## c.
+
+### Check assumptions
+
+Before I fit a model:
+
+1.  Linear relationship between response and predictor variables
+
+    Yes, I would expect a linear relationship between my X variable, screen time (minutes), and my Y variable, sleep duration (minutes).
+
+2.  Independent error (no correlation between errors)
+
+    An error from one observation will not influence an error from another observation since both variables are their own observation and it is made daily.
+
+After I fit my model:
+
+1.  Homoscedasticity of error (constant variance)
+
+    (Error should be the same throughout the range of predictor values in the model)
+
+2.  Normally distributed error
+
+    (Error should be normally distributed)
+
+### Analysis
+
+### (if applicable) Effect size
 
 ## d.
 
