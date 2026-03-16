@@ -25,6 +25,8 @@ library(tidyverse)
 library(here)
 library(janitor)
 library(readxl)
+library(gtsummary)
+library(flextable)
 library(ggeffects)
 library(readr)
 
@@ -305,6 +307,15 @@ data_pred
 ```
 
 ```{r}
+#| label: model summary
+tbl_regression (model,
+                intercept = TRUE,
+                label = list(`(Intercept)` = "Intercept",
+                `screen_time_minutes` = "Screen Time")) |> 
+  as_flex_table()
+```
+
+```{r}
 #| label: visualization
 ggplot(data = my_data_clean,
        aes(x = screen_time_minutes,
@@ -331,10 +342,12 @@ ggplot(data = my_data_clean,
 
 ## e.
 
-Write a caption for the figure you created in part d. Include a figure number, title, description of visual components (including but not limited to shapes, colors, lines, etc.)
+**Figure 1. Screen time was positively associated with sleep duration.** The purple diamonds represent individual data points for each day from 01/26/2026 to 03/11/2026. The predictor variable, screen time which is measured in minutes, is recorded on the x-axis while the response variable, sleep duration which is also measured in minutes, is reflected on the y-axis. The gray shaded band represents the 95% confidence interval around the model predictions. As the number of minutes of screen time increased, the predicted sleep duration also increased based on the fitted linear regression model. The black regression line is slightly sloping upwards, indicating that the higher my daily screen time was, the slightly longer the sleep duration, on average. Although there is quite a bit of variation around the model predictions.
 
-## f.
+## f. 
 
-In 2-4 sentences, write about your results (with appropriate components in the parenthetical statistical summary).
+Sleep duration (minutes) showed a slight positive relationship with screen time (minutes). Although screen time was not a statistically significant predictor of sleep duration, as screen time increased so did sleep duration (linear regression, F(1, 31) = 2.04, R^2^ = 0.062, p = 0.163, $\alpha$ = 0.05). Based on model predictions, for each additional 1 minute increase in screen time, sleep duration increased by 0.35 minutes (β = 0.348 ± 0.244 SE). On average,
 
-Include any components that would provide additional context to your interpretation (e.g. differences in means) or allow you to quantify the magnitude of effects (e.g. effect sizes).
+Screen time only explained 6.2% of the variation in sleep duration.
+
+include effect size??
