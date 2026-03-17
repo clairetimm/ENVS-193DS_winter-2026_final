@@ -31,6 +31,7 @@ library(flextable)
 library(ggeffects)
 library(readr)
 library(MuMIn)
+library(DHARMa)
 
 #read in data here
 kelp <- read_csv("../data/annual_kelp.csv")
@@ -210,33 +211,62 @@ The best model as determined by Akaike's Information Criterion (AIC) was the mod
 
 ## f.
 
-Check your diagnostics for the model you selected using simulated residuals from the `DHARMa` package.
-
-Display all code and output.
+```{r}
+#| label: DHARMa
+plot(
+  simulateResiduals(model2)
+)
+```
 
 ## g.
 
-Create a plot showing model predictions *for your selected model* with 95% confidence intervals around the predictions and the underlying data.
-
-Show and annotate all code. Show the output.
-
-For full credit:
-
--   make sure the x- and y-axis labels are written in full with units if necessary
-
--   take out the gridlines
-
--   use colors that are different from the default
+```{r}
+#| label: data visualization
+mod_preds <- ggpredict(model2,
+                       terms = "vo_nest")
+ggplot(data = mopl_clean,
+       aes(x = vo_nest,
+           y = used_bin)) +
+  geom_point(size = 3, 
+             alpha = 0.4,
+             color = "deeppink4") + 
+  geom_ribbon(data = mod_preds,
+              aes(x = x,
+                  y = predicted,
+                  ymin = conf.low,
+                  ymax = conf.high),
+              alpha = 0.3,
+              fill = "lightblue") + 
+  geom_line(data = mod_preds,
+            aes(x = x, 
+                y = predicted)) + 
+  scale_y_continuous(limits = c(0, 1),
+                     breaks = c(0, 1)) + 
+  labs(
+    x = "Visual Obstruction at Nest Site (cm)",
+    y = "Probability of Mountain Plover Nest Site Use",
+    title = "Effect of Visual Obstruction on Mountain Plover Nest Site Use"
+    ) + 
+  theme_classic()
+```
 
 ## h.
 
-Include a figure number, title, description of the figure, and data citation.
+**Figure 1. Effect of visual obstruction on use of Mountain Plover nest site.** This visualization shows the predicted probability of a Mountain Plover nest site in use as a function of visual obstruction at the nest time (cm). The magenta points represent individual observed data, 0 indicating unused sites and 1 indicating used sites. Due to the transparency of the points, areas of darker circles show more observations at that value. The solid line sloping downwards represents the predictions of a logistic regression model with visual obstruction as the only predictor and the light blue shaded band shows the 95% confidence interval. The visualization shows that the probability of Mountain Plover nest site use decreases as visual obstruction increases. Data source: Duchardt, Courtney; Beck, Jeffrey; Augustine, David (2020). Data from: Mountain Plover habitat selection and nest survival in relation to weather variability and spatial attributes of Black-tailed Prairie Dog disturbance \[Dataset\]. Dryad. <https://doi.org/10.5061/dryad.ttdz08kt7>
 
 ## i.
 
 Calculate the predicted probability of Mountain Plover nest site occupancy at 0 on the index of visual obstruction.
 
 Show and annotate all code. Display the output.
+
+```{r}
+#| label: probability
+ggpredict(model2,
+          terms = "vo_nest [0]")
+```
+
+(add context?)
 
 ## j.
 
@@ -247,6 +277,8 @@ Write 3-5 sentences summarizing what you found, making references to the figure 
 -   what relationships, if any, exist between visual obstruction and distance to prairie dog colony and probability of occupancy
 
 -   the biology behind the trends you found - what explains the relationship between visual obstruction and probability of Mountain Plover nest site occupancy?
+
+The predicted probability of nest site occupancy with no visual obstruction (at 0) is .
 
 # Problem 4. Affective and exploratory visualization
 
@@ -369,7 +401,7 @@ ggplot(data = my_data_clean,
 
 ## e.
 
-**Figure 1. Screen time was positively associated with sleep duration.** The purple diamonds represent individual data points for each day from 01/26/2026 to 03/11/2026. The predictor variable, screen time which is measured in minutes, is recorded on the x-axis while the response variable, sleep duration which is also measured in minutes, is reflected on the y-axis. The gray shaded band represents the 95% confidence interval around the model predictions. As the number of minutes of screen time increased, the predicted sleep duration also increased based on the fitted linear regression model. The black regression line is slightly sloping upwards, indicating that the higher my daily screen time was, the slightly longer the sleep duration, on average. Although there is quite a bit of variation around the model predictions.
+**Figure 2. Screen time was positively associated with sleep duration.** The purple diamonds represent individual data points for each day from 01/26/2026 to 03/11/2026. The predictor variable, screen time which is measured in minutes, is recorded on the x-axis while the response variable, sleep duration which is also measured in minutes, is reflected on the y-axis. The gray shaded band represents the 95% confidence interval around the model predictions. As the number of minutes of screen time increased, the predicted sleep duration also increased based on the fitted linear regression model. The black regression line is slightly sloping upwards, indicating that the higher my daily screen time was, the slightly longer the sleep duration, on average. Although there is quite a bit of variation around the model predictions.
 
 ## f. 
 
