@@ -13,4 +13,4 @@ In the code folder, there is a file called 'script_files' that contains all code
 
 ## Rendered output
 
-The rendered output for the code in this repository is [here]()
+The rendered output for the code in this repository is [here](https://clairetimm.github.io/ENVS-193DS_winter-2026_final/code/script.html)
