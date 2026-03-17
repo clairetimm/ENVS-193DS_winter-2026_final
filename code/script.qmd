@@ -24,11 +24,13 @@ warning: false
 library(tidyverse)
 library(here)
 library(janitor)
+library(dplyr)
 library(readxl)
 library(gtsummary)
 library(flextable)
 library(ggeffects)
 library(readr)
+library(MuMIn)
 
 #read in data here
 kelp <- read_csv("../data/annual_kelp.csv")
@@ -40,9 +42,9 @@ my_data <- read_csv("../data/mydata.csv")
 
 ## a. [READ WORDS AND WHAT THE METRIC OF CENTRAL TENDENCY!!!]{.underline}
 
-In part one the researchers used a linear regression test to determine whether precipitation predicts flooded wetland area. This is because both variables are continuous, the predictor variable is precipitation and the response variable is flooded wetland area (m^2^).
+In part one the researchers used a linear regression test to determine whether precipitation predicts flooded wetland area. This test can be used because both predictor variable is precipitation, a continuous variable, and the response variable is flooded wetland area (m^2^), which is also a continuous variable.
 
-In the second part, my coworker likely used a Kruskal-Wallis test to evaluate if median flooded wetland area differs across water year classifications. This test is used to compare medians across more than two groups, in this study the groups were wet, above normal, below normal, dry, or critical drought.
+In the second part, they likely used a Kruskal-Wallis test to evaluate if median flooded wetland area differs across water year classifications. This test is used to compare medians across more than two groups, in this study the groups were wet, above normal, below normal, dry, or critical drought.
 
 ## b.
 
@@ -50,9 +52,9 @@ A box plot could be used to visualize the test in part 2. This graph will have w
 
 ## c.
 
-We retained the null hypothesis that precipitation doesn’t predict flooded wetland area (linear regression, , p = 0.11, ⍺ = significance level).
+Based on model predictions, we retained the null hypothesis that precipitation doesn’t predict flooded wetland area (linear regression, F(df, df) = F-statistic, R^2^ = effect size, p = 0.11, ⍺ = significance level).
 
-We retained the null hypothesis and found no difference (η^2^ = stat) in median flooded wetland area (m^2^) across water year classification (wet, above normal, below normal, dry, critical drought) (Kruskal-Wallis test, 𝜒^2^(2)= stat, p = 0.12, ⍺ = significance level).
+We retained the null hypothesis and found no difference (η^2^ = stat) in median flooded wetland area (m^2^) across water year classification (wet, above normal, below normal, dry, critical drought) (Kruskal-Wallis test, 𝜒^2^(2)= test stat, p = 0.12, ⍺ = significance level).
 
 ## d.
 
@@ -131,9 +133,7 @@ Carpinteria shows the least variable mean kelp fronds per year by the .
 
 ## a.
 
-In 1-2 sentences, explain what the 1s and 0s mean in this data set biologically.
-
-The 1s mean while the 0s mean .
+The response variable is the nest survival of a Mountain Plover, the 1s mean the nest successfully survived, while the 0s mean the nest failed, either due to predation or abandonment.
 
 ## b.
 
@@ -147,6 +147,14 @@ In 2-3 sentences for each predictor, describe:
 
 -   where in the paper you found this information (the specific section, subsection, and paragraph)
 
+Visual Obstruction:
+
+-   This predictor variable is a continuous variable that is measured as
+
+Distance to prairie dog colony:
+
+-   This predictor variable is a continuous variable, measured as the distance (unit) from
+
 ## c.
 
 Make a table of all the models you will need to run. You will run 4 models: a null model, a saturated model, and two other models with different combinations of predictors.
@@ -155,31 +163,50 @@ Stuck on how to create a table? See workshop 8 for an example.
 
 Your table should have 4 columns: (1) model number, (2) visual obstruction, (3) distance to prairie dog colony, and (4) model description.
 
+| Model number | Visual Obstruction |  Distance to Prairie Dog Colony | Model Description |
+|-------------|:-----------:|:-----------:|:--------------------:|
+| 1 |  |  | No predictors (null model) |
+| 2 | X | X | Saturated model |
+| 3 | X |  | Model with visual obstruction only |
+| 4 |  | X | Model with distance to prairie dog colony only |
+
 ## d.
 
-Create a clean dataset to use called `mopl_clean`. In no particular order:
-
--   clean the column names
-
--   create a new column called `used_bin` to create 1s and 0s from the `id` column
-
--   select `used_bin`, `edgedist`, and `vo_nest`
-
 Then, write your code to run all your models. Do not display any output.
+
+```{r}
+#| label: cleaning data up
+mopl_clean <- mopl |> 
+  clean_names() |> 
+  mutate(used_bin = recode(id,
+                              "used" = 1, 
+                              "available" = 0)) |> 
+  select(used_bin, edgedist, vo_nest)
+
+#| label: models
+model1 <- glm(used_bin ~ 1, data = mopl_clean, family = binomial)
+
+model2 <- glm(used_bin ~ vo_nest, data = mopl_clean, family = binomial)
+
+model3 <- glm(used_bin ~ edgedist, data = mopl_clean, family = binomial)
+
+model4 <- glm(used_bin ~ vo_nest + edgedist, data = mopl_clean, family = binomial)
+```
 
 ## e.
 
-Create a clean dataset to use called `mopl_clean`. In no particular order:
+```{r}
+#| label: AIC model selection
+AICc(
+  model1,
+  model2,
+  model3,
+  model4
+) |> 
+  arrange(AICc)
+```
 
--   clean the column names
-
--   create a new column called `used_bin` to create 1s and 0s from the `id` column
-
--   select `used_bin`, `edgedist`, and `vo_nest`
-
-edited 2026-03-11: included instructions for cleaning data
-
-Then, write your code to run all your models. Do not display any output.
+The best model as determined by Akaike's Information Criterion (AIC) was the model predicting that Mountain Plover nest side was used as a function of visual obstruction. (edit!)
 
 ## f.
 
