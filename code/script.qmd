@@ -46,7 +46,7 @@ my_data <- read_csv("../data/mydata.csv")
 
 # Problem 1. Research writing
 
-## a. 
+## a.
 
 In part one the researchers used a linear regression test to determine whether precipitation predicts flooded wetland area. This test can be used because the predictor variable, precipitation, is a continuous variable, and the response variable, flooded wetland area (m^2^), is also a continuous variable.
 
@@ -138,7 +138,7 @@ Carpinteria shows the least variable mean kelp fronds per year with its data poi
 
 The response variable is the nest survival of a Mountain Plover determined as if the site is used or available, the 1s mean the nest successfully survived so the site is used, while the 0s mean the nest failed, either due to predation or abandonment so the site is available.
 
-## b. 
+## b.
 
 Visual Obstruction:
 
@@ -150,8 +150,8 @@ Distance to prairie dog colony:
 
 ## c.
 
-| Model Number | Visual Obstruction |  Distance to Prairie Dog Colony | Model Description |
-|-------------|:-----------:|:-----------:|:--------------------:|
+| Model Number | Visual Obstruction | Distance to Prairie Dog Colony | Model Description |
+|----|:--:|:--:|:--:|
 | 1 |  |  | No predictors (null model) |
 | 2 | X | X | Saturated model (both predictors) |
 | 3 | X |  | Model with visual obstruction only |
@@ -258,7 +258,6 @@ ggplot(data = mopl_clean, #start with mopl_clean dataframe
 #| label: probability
 ggpredict(model2, #generate predicted vaules from model2
           terms = "vo_nest [0]") #calculate when visual obstruction is 0cm
-
 ```
 
 ## j.
@@ -376,6 +375,6 @@ ggplot(data = my_data_clean, #ggplot with my_data_clean dataframe
 
 **Figure 2. Screen time was positively associated with sleep duration.** The purple diamonds represent individual data points for each day from 01/26/2026 to 03/11/2026. The predictor variable, screen time which is measured in minutes, is recorded on the x-axis while the response variable, sleep duration which is also measured in minutes, is reflected on the y-axis. The gray shaded band represents the 95% confidence interval around the model predictions. As the number of minutes of screen time increased, the predicted sleep duration also increased based on the fitted linear regression model. The black regression line is slightly sloping upwards, indicating that the higher my daily screen time was, the slightly longer the sleep duration, on average. Although there is quite a bit of variation around the model predictions.
 
-## f. 
+## f.
 
 Sleep duration (minutes) showed a slight positive relationship with screen time (minutes). Although screen time was not a statistically significant predictor of sleep duration, as screen time increased so did sleep duration (linear regression, F(1, 31) = 2.04, R^2^ = 0.062, p = 0.163, $\alpha$ = 0.05). Based on model predictions, for each additional 1 minute increase in screen time, sleep duration increased by 0.35 minutes (β = 0.348 ± 0.244 SE). On average, screen time only explained 6.2% of the variation in sleep duration which is a small effect size.
