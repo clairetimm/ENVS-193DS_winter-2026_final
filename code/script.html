@@ -118,21 +118,21 @@ window.Quarto = {
   <li><a href="#set-up" id="toc-set-up" class="nav-link active" data-scroll-target="#set-up">Set Up</a></li>
   <li><a href="#problem-1.-research-writing" id="toc-problem-1.-research-writing" class="nav-link" data-scroll-target="#problem-1.-research-writing">Problem 1. Research writing</a>
   <ul class="collapse">
-  <li><a href="#a.-read-words-and-what-the-metric-of-central-tendency" id="toc-a.-read-words-and-what-the-metric-of-central-tendency" class="nav-link" data-scroll-target="#a.-read-words-and-what-the-metric-of-central-tendency">a. <u>READ WORDS AND WHAT THE METRIC OF CENTRAL TENDENCY!!!</u></a></li>
+  <li><a href="#a." id="toc-a." class="nav-link" data-scroll-target="#a.">a.</a></li>
   <li><a href="#b." id="toc-b." class="nav-link" data-scroll-target="#b.">b.</a></li>
   <li><a href="#c." id="toc-c." class="nav-link" data-scroll-target="#c.">c.</a></li>
   <li><a href="#d." id="toc-d." class="nav-link" data-scroll-target="#d.">d.</a></li>
   </ul></li>
   <li><a href="#problem-2.-data-visualization" id="toc-problem-2.-data-visualization" class="nav-link" data-scroll-target="#problem-2.-data-visualization">Problem 2. Data visualization</a>
   <ul class="collapse">
-  <li><a href="#a." id="toc-a." class="nav-link" data-scroll-target="#a.">a.</a></li>
+  <li><a href="#a.-1" id="toc-a.-1" class="nav-link" data-scroll-target="#a.-1">a.</a></li>
   <li><a href="#b.-1" id="toc-b.-1" class="nav-link" data-scroll-target="#b.-1">b.</a></li>
   <li><a href="#c.-1" id="toc-c.-1" class="nav-link" data-scroll-target="#c.-1">c.</a></li>
   <li><a href="#d.-1" id="toc-d.-1" class="nav-link" data-scroll-target="#d.-1">d.</a></li>
   </ul></li>
   <li><a href="#problem-3.-data-analysis" id="toc-problem-3.-data-analysis" class="nav-link" data-scroll-target="#problem-3.-data-analysis">Problem 3. Data analysis</a>
   <ul class="collapse">
-  <li><a href="#a.-1" id="toc-a.-1" class="nav-link" data-scroll-target="#a.-1">a.</a></li>
+  <li><a href="#a.-2" id="toc-a.-2" class="nav-link" data-scroll-target="#a.-2">a.</a></li>
   <li><a href="#b.-2" id="toc-b.-2" class="nav-link" data-scroll-target="#b.-2">b.</a></li>
   <li><a href="#c.-2" id="toc-c.-2" class="nav-link" data-scroll-target="#c.-2">c.</a></li>
   <li><a href="#d.-2" id="toc-d.-2" class="nav-link" data-scroll-target="#d.-2">d.</a></li>
@@ -145,7 +145,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#problem-4.-affective-and-exploratory-visualization" id="toc-problem-4.-affective-and-exploratory-visualization" class="nav-link" data-scroll-target="#problem-4.-affective-and-exploratory-visualization">Problem 4. Affective and exploratory visualization</a>
   <ul class="collapse">
-  <li><a href="#a.-2" id="toc-a.-2" class="nav-link" data-scroll-target="#a.-2">a.</a></li>
+  <li><a href="#a.-3" id="toc-a.-3" class="nav-link" data-scroll-target="#a.-3">a.</a></li>
   <li><a href="#b.-3" id="toc-b.-3" class="nav-link" data-scroll-target="#b.-3">b.</a></li>
   <li><a href="#c.-3" id="toc-c.-3" class="nav-link" data-scroll-target="#c.-3">c.</a>
   <ul class="collapse">
@@ -199,47 +199,52 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#read in packages here</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DHARMa)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#read in data here</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>kelp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/annual_kelp.csv"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>mopl <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/MOPL_nest.csv"</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/mydata.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DHARMa)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#set up font</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">font_add_google</span>(<span class="st">"Roboto"</span>, <span class="st">"myfont"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#read in data here</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>kelp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/annual_kelp.csv"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>mopl <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/MOPL_nest.csv"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/mydata.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="problem-1.-research-writing" class="level1">
 <h1>Problem 1. Research writing</h1>
-<section id="a.-read-words-and-what-the-metric-of-central-tendency" class="level2">
-<h2 class="anchored" data-anchor-id="a.-read-words-and-what-the-metric-of-central-tendency">a. <u>READ WORDS AND WHAT THE METRIC OF CENTRAL TENDENCY!!!</u></h2>
-<p>In part one the researchers used a linear regression test to determine whether precipitation predicts flooded wetland area. This test can be used because both predictor variable is precipitation, a continuous variable, and the response variable is flooded wetland area (m<sup>2</sup>), which is also a continuous variable.</p>
+<section id="a." class="level2">
+<h2 class="anchored" data-anchor-id="a.">a.</h2>
+<p>In part one the researchers used a linear regression test to determine whether precipitation predicts flooded wetland area. This test can be used because the predictor variable, precipitation, is a continuous variable, and the response variable, flooded wetland area (m<sup>2</sup>), is also a continuous variable.</p>
 <p>In the second part, they likely used a Kruskal-Wallis test to evaluate if median flooded wetland area differs across water year classifications. This test is used to compare medians across more than two groups, in this study the groups were wet, above normal, below normal, dry, or critical drought.</p>
 </section>
 <section id="b." class="level2">
 <h2 class="anchored" data-anchor-id="b.">b.</h2>
-<p>A box plot could be used to visualize the test in part 2. This graph will have water year classification on the x-axis (wet, above normal, below normal, dry, critical drought) and flooded wetland area (m<sup>2</sup>) on the y-axis. There will be a different colored box plot for each water year classification, each plot will have a median line which will show the statistic being compared in a Kruskal-Wallis test. Additionally there will also be individual data points jittered on the graph to show the distribution of individual observations. The purpose of this graph is to visually allow readers to compare the median flooded wetland area across each of the categories for water year type.</p>
+<p>A box plot could be used to visualize the test in part 2. This graph will have water year classification on the x-axis (wet, above normal, below normal, dry, and critical drought) and the y-axis will have the flooded wetland area (m<sup>2</sup>). There will be a different colored box plot for each water year classification and each plot will have a median line which will show the statistic being compared in a Kruskal-Wallis test. Additionally there will also be individual data points jittered on the graph to show the distribution of individual observations. The purpose of this graph is to visually allow readers to compare the median flooded wetland area across each of the categories for water year type.</p>
 </section>
 <section id="c." class="level2">
 <h2 class="anchored" data-anchor-id="c.">c.</h2>
-<p>Based on model predictions, we retained the null hypothesis that precipitation doesn’t predict flooded wetland area (linear regression, F(df, df) = F-statistic, R<sup>2</sup> = effect size, p = 0.11, ⍺ = significance level).</p>
-<p>We retained the null hypothesis and found no difference (η<sup>2</sup> = stat) in median flooded wetland area (m<sup>2</sup>) across water year classification (wet, above normal, below normal, dry, critical drought) (Kruskal-Wallis test, 𝜒<sup>2</sup>(2)= test stat, p = 0.12, ⍺ = significance level).</p>
+<p>We found that precipitation doesn’t predict flooded wetland area (linear regression, F(df, df) = test-statistic(F), R<sup>2</sup> = coefficient of determination, p = 0.11, ⍺ = significance level).</p>
+<p>We found no difference (η<sup>2</sup> = effect size) in median flooded wetland area (m<sup>2</sup>) across water year classification (wet, above normal, below normal, dry, critical drought) (Kruskal-Wallis test, 𝜒<sup>2</sup>(4)= test stat, p = 0.12, ⍺ = significance level).</p>
 </section>
 <section id="d." class="level2">
 <h2 class="anchored" data-anchor-id="d.">d.</h2>
-<p>An additional variable that could influence the flooded area of a wetland is water management for wetlands. This is a binary categorical variable (managed vs un-managed). If management actions are taken, such as pumping water or using control gates, this will</p>
+<p>An additional variable that could influence the flooded area of a wetland is water management for wetlands. This is a binary categorical variable (managed vs un-managed). If management actions are taken, such as pumping water or using control gates, this can be turned into a factor variable of 1 and no water management actions in an areas can be represented as a 0. This variable might influence wetland flooding because by taking intentional actions to manage water, this could decrease the likelihood of flooded wetlands since the water will have been pumped elsewhere.</p>
 </section>
 </section>
 <section id="problem-2.-data-visualization" class="level1">
 <h1>Problem 2. Data visualization</h1>
-<section id="a." class="level2">
-<h2 class="anchored" data-anchor-id="a.">a.</h2>
+<section id="a.-1" class="level2">
+<h2 class="anchored" data-anchor-id="a.-1">a.</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>kelp_clean <span class="ot">&lt;-</span> kelp <span class="sc">|&gt;</span> <span class="co">#create new object kelp_clean</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span>  <span class="co">#clean up column names (all lowercase and underscores not spaces)</span></span>
@@ -260,13 +265,13 @@ window.Quarto = {
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(kelp_clean, <span class="at">n =</span> <span class="dv">5</span>) <span class="co">#randomly displays 5 observations (rows) from the dataset </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
-  site_name   year mean_fronds
-  &lt;fct&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-1 Isla Vista  2002        3.47
-2 Naples      2007       17.2 
-3 Naples      2018       17.7 
-4 Isla Vista  2007       23.6 
-5 Naples      2005       10.2 </code></pre>
+  site_name    year mean_fronds
+  &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+1 Isla Vista   2006       11.6 
+2 Carpinteria  2025       12.9 
+3 Carpinteria  2022        9.52
+4 Isla Vista   2011        9.63
+5 Naples       2002        3.01</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(kelp_clean) <span class="co">#shows the structure of the data frame (variables, data types, and size)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -279,9 +284,7 @@ window.Quarto = {
 </section>
 <section id="b.-1" class="level2">
 <h2 class="anchored" data-anchor-id="b.-1">b.</h2>
-<p>The code chunk above includes a line that filters out frond observations from the date <code>2000-09-22</code> in transect 6 in quad 40.</p>
-<p>In 1-2 sentences, describe why. What is the number for the value of fronds in that “quad” in that “transect”? What does that value represent? Reference the specific place you found information on what that value represents (e.g.&nbsp;in the Summary tab of the data page).</p>
-<p>The certain code chunk is filtered out due to the missing datasheet. In transect 6, quad 40,</p>
+<p>The certain code chunk is filtered out due to the missing datasheet, which is mentioned in the “Notes” column in the data, so there was no real frond count and this observation should be excluded from analysis. In transect 6, quad 40, the number for the value of fronds is -99999, this value represents a very large negative number that is unrealistic and meant to be used as an extreme placeholder value to show that there is missing data here and it can’t be a real biological measurement.</p>
 </section>
 <section id="c.-1" class="level2">
 <h2 class="anchored" data-anchor-id="c.-1">c.</h2>
@@ -302,7 +305,7 @@ window.Quarto = {
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean kelp fronds per year"</span>, <span class="co">#makes y-axis title</span></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Site"</span> <span class="co">#adds title to legened </span></span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="co">#changes theme of graph</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"myfont"</span>) <span class="sc">+</span> <span class="co">#changes theme of graph with new font</span></span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="co">#centers graph title</span></span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -317,39 +320,29 @@ window.Quarto = {
 </section>
 <section id="d.-1" class="level2">
 <h2 class="anchored" data-anchor-id="d.-1">d.</h2>
-<p>Isla Vista is the site that shows the most variable mean kelp fronds per year due to .</p>
-<p>Carpinteria shows the least variable mean kelp fronds per year by the .</p>
+<p>Isla Vista is the site that shows the most variable mean kelp fronds per year due to having the highest values for mean kelp frond per year, indicated by the large spikes in values (~ 30-40), while also having large drops across years with very low values (~ 4-9). The spread of high mean kelp fronds to very low mean kelp fronds shows a large variation year-to-year.</p>
+<p>Carpinteria shows the least variable mean kelp fronds per year with its data points on the graph all clustered together in a small range (~ 3-16). The line connecting data points for Carpinteria shows very small fluctuations and is relatively consistent showing a more stable mean kelp frond.</p>
 </section>
 </section>
 <section id="problem-3.-data-analysis" class="level1">
 <h1>Problem 3. Data analysis</h1>
-<section id="a.-1" class="level2">
-<h2 class="anchored" data-anchor-id="a.-1">a.</h2>
-<p>The response variable is the nest survival of a Mountain Plover, the 1s mean the nest successfully survived, while the 0s mean the nest failed, either due to predation or abandonment.</p>
+<section id="a.-2" class="level2">
+<h2 class="anchored" data-anchor-id="a.-2">a.</h2>
+<p>The response variable is the nest survival of a Mountain Plover determined as if the site is used or available, the 1s mean the nest successfully survived so the site is used, while the 0s mean the nest failed, either due to predation or abandonment so the site is available.</p>
 </section>
 <section id="b.-2" class="level2">
 <h2 class="anchored" data-anchor-id="b.-2">b.</h2>
-<p>In this problem, you will be examining the potential effects of <em>visual obstruction</em> and <em>distance to prairie dog colony edge</em> on the probability of a nest site being occupied by a Mountain Plover.</p>
-<p>In 2-3 sentences for each predictor, describe:</p>
-<ul>
-<li><p>what kind of variable it is (i.e.&nbsp;continuous, discrete, categorical, etc.),</p></li>
-<li><p>how it could possibly influence the probability of Mountain Plover nest site use (i.e.&nbsp;as visual obstruction increases, the probability of Mountain Plover nest site use would ______________ because…), and</p></li>
-<li><p>where in the paper you found this information (the specific section, subsection, and paragraph)</p></li>
-</ul>
 <p>Visual Obstruction:</p>
 <ul>
-<li>This predictor variable is a continuous variable that is measured as</li>
+<li>This predictor variable is a continuous variable, measured in cm. As visual obstruction increases, the probability of Mountain Plover nest sites would decrease, as noted in the Introduction section this because these birds prefer “short and sparse vegetation” to breed on.</li>
 </ul>
 <p>Distance to prairie dog colony:</p>
 <ul>
-<li>This predictor variable is a continuous variable, measured as the distance (unit) from</li>
+<li>This predictor variable is a continuous variable, measured as the distance (meters). As distance to a prairie dog colony increases, the probability of Mountain Plover nest site use would decrease because prairie dogs create ideal nesting habitats for Mountain Plovers through soil disturbance and vegetation clipping, found in the Introduction section.</li>
 </ul>
 </section>
 <section id="c.-2" class="level2">
 <h2 class="anchored" data-anchor-id="c.-2">c.</h2>
-<p>Make a table of all the models you will need to run. You will run 4 models: a null model, a saturated model, and two other models with different combinations of predictors.</p>
-<p>Stuck on how to create a table? See workshop 8 for an example.</p>
-<p>Your table should have 4 columns: (1) model number, (2) visual obstruction, (3) distance to prairie dog colony, and (4) model description.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 21%">
@@ -359,7 +352,7 @@ window.Quarto = {
 </colgroup>
 <thead>
 <tr class="header">
-<th>Model number</th>
+<th>Model Number</th>
 <th style="text-align: center;">Visual Obstruction</th>
 <th style="text-align: center;">Distance to Prairie Dog Colony</th>
 <th style="text-align: center;">Model Description</th>
@@ -376,7 +369,7 @@ window.Quarto = {
 <td>2</td>
 <td style="text-align: center;">X</td>
 <td style="text-align: center;">X</td>
-<td style="text-align: center;">Saturated model</td>
+<td style="text-align: center;">Saturated model (both predictors)</td>
 </tr>
 <tr class="odd">
 <td>3</td>
@@ -397,33 +390,43 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="d.-2">d.</h2>
 <p>Then, write your code to run all your models. Do not display any output.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mopl_clean <span class="ot">&lt;-</span> mopl <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">used_bin =</span> <span class="fu">recode</span>(id,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"used"</span> <span class="ot">=</span> <span class="dv">1</span>, </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"available"</span> <span class="ot">=</span> <span class="dv">0</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(used_bin, edgedist, vo_nest)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mopl_clean <span class="ot">&lt;-</span> mopl <span class="sc">|&gt;</span> <span class="co">#create new object with mopl data frame</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> <span class="co">#clean standardized column names</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">used_bin =</span> <span class="fu">recode</span>(id, <span class="co">#create response variable for nesting site use</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"used"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="co">#site used is represented as 1</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"available"</span> <span class="ot">=</span> <span class="dv">0</span>)) <span class="sc">|&gt;</span> <span class="co">#site unused (available) is represented as 0</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(used_bin, edgedist, vo_nest) <span class="co">#keep only these variables </span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: models</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(used_bin <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> mopl_clean, <span class="at">family =</span> binomial)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(used_bin <span class="sc">~</span> vo_nest, <span class="at">data =</span> mopl_clean, <span class="at">family =</span> binomial)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(used_bin <span class="sc">~</span> edgedist, <span class="at">data =</span> mopl_clean, <span class="at">family =</span> binomial)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">glm</span>(used_bin <span class="sc">~</span> vo_nest <span class="sc">+</span> edgedist, <span class="at">data =</span> mopl_clean, <span class="at">family =</span> binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#null model estimating probability of site use with neither predictors </span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(used_bin <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> mopl_clean, </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">"binomial"</span>) </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#tests effect of visual obstruction on probability of nest site use </span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(used_bin <span class="sc">~</span> vo_nest, </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> mopl_clean, </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">"binomial"</span>) </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#tests effect of distance to prairie dog colony on site use </span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(used_bin <span class="sc">~</span> edgedist, </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> mopl_clean, </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">"binomial"</span>) </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#combines both effects of visual obstruction and distance to prairie dog colony on site use</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">glm</span>(used_bin <span class="sc">~</span> vo_nest <span class="sc">+</span> edgedist, </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> mopl_clean, </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">"binomial"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="e." class="level2">
 <h2 class="anchored" data-anchor-id="e.">e.</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AICc</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  model1,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  model2,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  model3,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  model4</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AICc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#compare regression models using Akaike Information Criterion </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">AICc</span>( </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  model1,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  model2,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  model3,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  model4</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AICc) <span class="co">#ranks model from lowest to highest AICc value </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       df     AICc
 model2  2 331.8130
@@ -432,14 +435,15 @@ model1  1 384.6318
 model3  2 386.1351</code></pre>
 </div>
 </div>
-<p>The best model as determined by Akaike’s Information Criterion (AIC) was the model predicting that Mountain Plover nest side was used as a function of visual obstruction. (edit!)</p>
+<p>The best model as determined by having the lowest Akaike’s Information Criterion (AIC) value was the model predicting that Mountain Plover nest site was use as a function of visual obstruction.</p>
 </section>
 <section id="f." class="level2">
 <h2 class="anchored" data-anchor-id="f.">f.</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simulateResiduals</span>(model2)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creates simulated residuals and diagnostic plots to assess model fit </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simulateResiduals</span>(model2) </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -452,32 +456,33 @@ model3  2 386.1351</code></pre>
 <section id="g." class="level2">
 <h2 class="anchored" data-anchor-id="g.">g.</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mod_preds <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(model2,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">terms =</span> <span class="st">"vo_nest"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mopl_clean,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> vo_nest,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> used_bin)) <span class="sc">+</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.4</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"deeppink4"</span>) <span class="sc">+</span> </span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> mod_preds,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> predicted,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span> conf.low,</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> conf.high),</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.3</span>,</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> mod_preds,</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> x, </span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> predicted)) <span class="sc">+</span> </span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Visual Obstruction at Nest Site (cm)"</span>,</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probability of Mountain Plover Nest Site Use"</span>,</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Effect of Visual Obstruction on Mountain Plover Nest Site Use"</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> </span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model2 predicted probabilites and confidence intervals </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mod_preds <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(model2, <span class="co">#create object to store predictions</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">terms =</span> <span class="st">"vo_nest"</span>) <span class="co">#generate predictions </span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#base layer: ggplot </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mopl_clean, <span class="co">#start with mopl_clean dataframe </span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> vo_nest, <span class="co">#x is visual obstruction</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> used_bin)) <span class="sc">+</span> <span class="co">#y is nesting site use</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="co">#add data points</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="co">#make points more transparent</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"deeppink4"</span>) <span class="sc">+</span> <span class="co">#make data pink</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> mod_preds, <span class="co">#use mod_preds to add confidence interval</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="co">#x is from prediction object</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> predicted, <span class="co">#y is predicted probabilities from model</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span> conf.low, <span class="co">#lower bound of CI</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> conf.high), <span class="co">#upper bound of CI</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="co">#make band transparent </span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> <span class="co">#make band light blue </span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> mod_preds, <span class="co">#create line with mod_preds data</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="co">#x values</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> predicted)) <span class="sc">+</span> <span class="co">#y is predicited probabilites </span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="co">#restrict y-axis probability range</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span> <span class="co">#show only 0 and 1 axis ticks</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Visual Obstruction at Nest Site (cm)"</span>, <span class="co">#x-axis label</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probability of Mountain Plover Nest Site Use"</span>, <span class="co">#y-axis label</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Effect of Visual Obstruction on Mountain Plover Nest Site Use"</span>) <span class="sc">+</span> <span class="co">#add graph title  </span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="co">#remove gridlines</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -493,11 +498,9 @@ model3  2 386.1351</code></pre>
 </section>
 <section id="i." class="level2">
 <h2 class="anchored" data-anchor-id="i.">i.</h2>
-<p>Calculate the predicted probability of Mountain Plover nest site occupancy at 0 on the index of visual obstruction.</p>
-<p>Show and annotate all code. Display the output.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpredict</span>(model2,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">terms =</span> <span class="st">"vo_nest [0]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpredict</span>(model2, <span class="co">#generate predicted vaules from model2</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">terms =</span> <span class="st">"vo_nest [0]"</span>) <span class="co">#calculate when visual obstruction is 0cm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Predicted probabilities of used_bin
 
@@ -506,7 +509,6 @@ vo_nest | Predicted |     95% CI
       0 |      0.73 | 0.65, 0.80</code></pre>
 </div>
 </div>
-<p>(add context?)</p>
 </section>
 <section id="j." class="level2">
 <h2 class="anchored" data-anchor-id="j.">j.</h2>
@@ -521,8 +523,8 @@ vo_nest | Predicted |     95% CI
 </section>
 <section id="problem-4.-affective-and-exploratory-visualization" class="level1">
 <h1>Problem 4. Affective and exploratory visualization</h1>
-<section id="a.-2" class="level2">
-<h2 class="anchored" data-anchor-id="a.-2">a.</h2>
+<section id="a.-3" class="level2">
+<h2 class="anchored" data-anchor-id="a.-3">a.</h2>
 <ul>
 <li><p>How are the visualizations different from each other in the way you have represented your data?</p>
 <ul>
@@ -645,7 +647,7 @@ screen_time_minutes | Predicted |         95% CI
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">`</span><span class="at">screen_time_minutes</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Screen Time"</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_flex_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="tabwid"><style>.cl-41cb2c56{}.cl-41c7343e{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-41c73448{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-41c884f6{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-41c88500{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-41c88501{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-41c88502{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-41c88503{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-41c894d2{width:1.304in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894d3{width:0.616in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894dc{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894dd{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894de{width:1.304in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894df{width:0.616in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894e6{width:1.016in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894e7{width:0.82in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894f0{width:1.304in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894f1{width:0.616in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894fa{width:1.016in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894fb{width:0.82in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c894fc{width:1.304in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c89504{width:0.616in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c8950e{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-41c8950f{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-41cb2c56"><thead><tr style="overflow-wrap:break-word;"><th class="cl-41c894d2"><p class="cl-41c884f6"><span class="cl-41c7343e">Characteristic</span></p></th><th class="cl-41c894d3"><p class="cl-41c88500"><span class="cl-41c7343e">Beta</span></p></th><th class="cl-41c894dc"><p class="cl-41c88500"><span class="cl-41c7343e">95% CI</span></p></th><th class="cl-41c894dd"><p class="cl-41c88500"><span class="cl-41c7343e">p-value</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-41c894de"><p class="cl-41c88501"><span class="cl-41c73448">Intercept</span></p></td><td class="cl-41c894df"><p class="cl-41c88502"><span class="cl-41c73448">340</span></p></td><td class="cl-41c894e6"><p class="cl-41c88502"><span class="cl-41c73448">211, 468</span></p></td><td class="cl-41c894e7"><p class="cl-41c88502"><span class="cl-41c73448">&lt;0.001</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-41c894f0"><p class="cl-41c88501"><span class="cl-41c73448">Screen Time</span></p></td><td class="cl-41c894f1"><p class="cl-41c88502"><span class="cl-41c73448">0.35</span></p></td><td class="cl-41c894fa"><p class="cl-41c88502"><span class="cl-41c73448">-0.15, 0.84</span></p></td><td class="cl-41c894fb"><p class="cl-41c88502"><span class="cl-41c73448">0.2</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="4" class="cl-41c894fc"><p class="cl-41c88503"><span class="cl-41c73448">Abbreviation: CI = Confidence Interval</span></p></td></tr></tfoot></table></div>
+<div class="tabwid"><style>.cl-d645618a{}.cl-d63f0876{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d63f088a{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d6414438{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d6414442{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d6414443{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d641444c{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d641444d{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d64166a2{width:1.304in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166a3{width:0.616in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166ac{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166ad{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166b6{width:1.304in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166b7{width:0.616in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166b8{width:1.016in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166c0{width:0.82in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166c1{width:1.304in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166c2{width:0.616in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166c3{width:1.016in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166ca{width:0.82in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166d4{width:1.304in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166d5{width:0.616in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166d6{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d64166de{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-d645618a"><thead><tr style="overflow-wrap:break-word;"><th class="cl-d64166a2"><p class="cl-d6414438"><span class="cl-d63f0876">Characteristic</span></p></th><th class="cl-d64166a3"><p class="cl-d6414442"><span class="cl-d63f0876">Beta</span></p></th><th class="cl-d64166ac"><p class="cl-d6414442"><span class="cl-d63f0876">95% CI</span></p></th><th class="cl-d64166ad"><p class="cl-d6414442"><span class="cl-d63f0876">p-value</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-d64166b6"><p class="cl-d6414443"><span class="cl-d63f088a">Intercept</span></p></td><td class="cl-d64166b7"><p class="cl-d641444c"><span class="cl-d63f088a">340</span></p></td><td class="cl-d64166b8"><p class="cl-d641444c"><span class="cl-d63f088a">211, 468</span></p></td><td class="cl-d64166c0"><p class="cl-d641444c"><span class="cl-d63f088a">&lt;0.001</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d64166c1"><p class="cl-d6414443"><span class="cl-d63f088a">Screen Time</span></p></td><td class="cl-d64166c2"><p class="cl-d641444c"><span class="cl-d63f088a">0.35</span></p></td><td class="cl-d64166c3"><p class="cl-d641444c"><span class="cl-d63f088a">-0.15, 0.84</span></p></td><td class="cl-d64166ca"><p class="cl-d641444c"><span class="cl-d63f088a">0.2</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="4" class="cl-d64166d4"><p class="cl-d641444d"><span class="cl-d63f088a">Abbreviation: CI = Confidence Interval</span></p></td></tr></tfoot></table></div>
 </div>
 </div>
 <div class="cell">

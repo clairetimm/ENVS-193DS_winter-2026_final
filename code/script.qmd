@@ -23,6 +23,7 @@ warning: false
 #read in packages here
 library(tidyverse)
 library(here)
+library(showtext)
 library(janitor)
 library(dplyr)
 library(readxl)
@@ -33,6 +34,10 @@ library(readr)
 library(MuMIn)
 library(DHARMa)
 
+#set up font
+font_add_google("Roboto", "myfont")
+showtext_auto()
+
 #read in data here
 kelp <- read_csv("../data/annual_kelp.csv")
 mopl <- read_csv("../data/MOPL_nest.csv")
@@ -41,25 +46,25 @@ my_data <- read_csv("../data/mydata.csv")
 
 # Problem 1. Research writing
 
-## a. [READ WORDS AND WHAT THE METRIC OF CENTRAL TENDENCY!!!]{.underline}
+## a. 
 
-In part one the researchers used a linear regression test to determine whether precipitation predicts flooded wetland area. This test can be used because both predictor variable is precipitation, a continuous variable, and the response variable is flooded wetland area (m^2^), which is also a continuous variable.
+In part one the researchers used a linear regression test to determine whether precipitation predicts flooded wetland area. This test can be used because the predictor variable, precipitation, is a continuous variable, and the response variable, flooded wetland area (m^2^), is also a continuous variable.
 
 In the second part, they likely used a Kruskal-Wallis test to evaluate if median flooded wetland area differs across water year classifications. This test is used to compare medians across more than two groups, in this study the groups were wet, above normal, below normal, dry, or critical drought.
 
 ## b.
 
-A box plot could be used to visualize the test in part 2. This graph will have water year classification on the x-axis (wet, above normal, below normal, dry, critical drought) and flooded wetland area (m^2^) on the y-axis. There will be a different colored box plot for each water year classification, each plot will have a median line which will show the statistic being compared in a Kruskal-Wallis test. Additionally there will also be individual data points jittered on the graph to show the distribution of individual observations. The purpose of this graph is to visually allow readers to compare the median flooded wetland area across each of the categories for water year type.
+A box plot could be used to visualize the test in part 2. This graph will have water year classification on the x-axis (wet, above normal, below normal, dry, and critical drought) and the y-axis will have the flooded wetland area (m^2^). There will be a different colored box plot for each water year classification and each plot will have a median line which will show the statistic being compared in a Kruskal-Wallis test. Additionally there will also be individual data points jittered on the graph to show the distribution of individual observations. The purpose of this graph is to visually allow readers to compare the median flooded wetland area across each of the categories for water year type.
 
 ## c.
 
-Based on model predictions, we retained the null hypothesis that precipitation doesn’t predict flooded wetland area (linear regression, F(df, df) = F-statistic, R^2^ = effect size, p = 0.11, ⍺ = significance level).
+We found that precipitation doesn’t predict flooded wetland area (linear regression, F(df, df) = test-statistic(F), R^2^ = coefficient of determination, p = 0.11, ⍺ = significance level).
 
-We retained the null hypothesis and found no difference (η^2^ = stat) in median flooded wetland area (m^2^) across water year classification (wet, above normal, below normal, dry, critical drought) (Kruskal-Wallis test, 𝜒^2^(2)= test stat, p = 0.12, ⍺ = significance level).
+We found no difference (η^2^ = effect size) in median flooded wetland area (m^2^) across water year classification (wet, above normal, below normal, dry, critical drought) (Kruskal-Wallis test, 𝜒^2^(4)= test stat, p = 0.12, ⍺ = significance level).
 
 ## d.
 
-An additional variable that could influence the flooded area of a wetland is water management for wetlands. This is a binary categorical variable (managed vs un-managed). If management actions are taken, such as pumping water or using control gates, this will
+An additional variable that could influence the flooded area of a wetland is water management for wetlands. This is a binary categorical variable (managed vs un-managed). If management actions are taken, such as pumping water or using control gates, this can be turned into a factor variable of 1 and no water management actions in an areas can be represented as a 0. This variable might influence wetland flooding because by taking intentional actions to manage water, this could decrease the likelihood of flooded wetlands since the water will have been pumped elsewhere.
 
 # Problem 2. Data visualization
 
@@ -69,6 +74,7 @@ An additional variable that could influence the flooded area of a wetland is wat
 #| label: cleaning data
 #| message: false
 #| warning: false
+
 kelp_clean <- kelp |> #create new object kelp_clean
   clean_names() |>  #clean up column names (all lowercase and underscores not spaces)
   filter(site %in% c("IVEE", "NAPL", "CARP")) |> #selects only data from these 3 sites
@@ -92,11 +98,7 @@ str(kelp_clean) #shows the structure of the data frame (variables, data types, a
 
 ## b.
 
-The code chunk above includes a line that filters out frond observations from the date `2000-09-22` in transect 6 in quad 40.
-
-In 1-2 sentences, describe why. What is the number for the value of fronds in that “quad” in that “transect”? What does that value represent? Reference the specific place you found information on what that value represents (e.g. in the Summary tab of the data page).
-
-The certain code chunk is filtered out due to the missing datasheet. In transect 6, quad 40,
+The certain code chunk is filtered out due to the missing datasheet, which is mentioned in the "Notes" column in the data, so there was no real frond count and this observation should be excluded from analysis. In transect 6, quad 40, the number for the value of fronds is -99999, this value represents a very large negative number that is unrealistic and meant to be used as an extreme placeholder value to show that there is missing data here and it can't be a real biological measurement.
 
 ## c.
 
@@ -118,7 +120,7 @@ ggplot(data = kelp_clean, #ggplot call with kelp_clean data frame
     y = "Mean kelp fronds per year", #makes y-axis title
     color = "Site" #adds title to legened 
   ) + 
-  theme_minimal() + #changes theme of graph
+  theme_minimal(base_family = "myfont") + #changes theme of graph with new font
   theme(
     plot.title = element_text(hjust = 0.5) #centers graph title
   )
@@ -126,48 +128,32 @@ ggplot(data = kelp_clean, #ggplot call with kelp_clean data frame
 
 ## d.
 
-Isla Vista is the site that shows the most variable mean kelp fronds per year due to .
+Isla Vista is the site that shows the most variable mean kelp fronds per year due to having the highest values for mean kelp frond per year, indicated by the large spikes in values (\~ 30-40), while also having large drops across years with very low values (\~ 4-9). The spread of high mean kelp fronds to very low mean kelp fronds shows a large variation year-to-year.
 
-Carpinteria shows the least variable mean kelp fronds per year by the .
+Carpinteria shows the least variable mean kelp fronds per year with its data points on the graph all clustered together in a small range (\~ 3-16). The line connecting data points for Carpinteria shows very small fluctuations and is relatively consistent showing a more stable mean kelp frond.
 
 # Problem 3. Data analysis
 
 ## a.
 
-The response variable is the nest survival of a Mountain Plover, the 1s mean the nest successfully survived, while the 0s mean the nest failed, either due to predation or abandonment.
+The response variable is the nest survival of a Mountain Plover determined as if the site is used or available, the 1s mean the nest successfully survived so the site is used, while the 0s mean the nest failed, either due to predation or abandonment so the site is available.
 
-## b.
-
-In this problem, you will be examining the potential effects of *visual obstruction* and *distance to prairie dog colony edge* on the probability of a nest site being occupied by a Mountain Plover.
-
-In 2-3 sentences for each predictor, describe:
-
--   what kind of variable it is (i.e. continuous, discrete, categorical, etc.),
-
--   how it could possibly influence the probability of Mountain Plover nest site use (i.e. as visual obstruction increases, the probability of Mountain Plover nest site use would \_\_\_\_\_\_\_\_\_\_\_\_\_\_ because…), and
-
--   where in the paper you found this information (the specific section, subsection, and paragraph)
+## b. 
 
 Visual Obstruction:
 
--   This predictor variable is a continuous variable that is measured as
+-   This predictor variable is a continuous variable, measured in cm. As visual obstruction increases, the probability of Mountain Plover nest sites would decrease, as noted in the Introduction section this because these birds prefer "short and sparse vegetation" to breed on.
 
 Distance to prairie dog colony:
 
--   This predictor variable is a continuous variable, measured as the distance (unit) from
+-   This predictor variable is a continuous variable, measured as the distance (meters). As distance to a prairie dog colony increases, the probability of Mountain Plover nest site use would decrease because prairie dogs create ideal nesting habitats for Mountain Plovers through soil disturbance and vegetation clipping, found in the Introduction section.
 
 ## c.
 
-Make a table of all the models you will need to run. You will run 4 models: a null model, a saturated model, and two other models with different combinations of predictors.
-
-Stuck on how to create a table? See workshop 8 for an example.
-
-Your table should have 4 columns: (1) model number, (2) visual obstruction, (3) distance to prairie dog colony, and (4) model description.
-
-| Model number | Visual Obstruction |  Distance to Prairie Dog Colony | Model Description |
+| Model Number | Visual Obstruction |  Distance to Prairie Dog Colony | Model Description |
 |-------------|:-----------:|:-----------:|:--------------------:|
 | 1 |  |  | No predictors (null model) |
-| 2 | X | X | Saturated model |
+| 2 | X | X | Saturated model (both predictors) |
 | 3 | X |  | Model with visual obstruction only |
 | 4 |  | X | Model with distance to prairie dog colony only |
 
@@ -177,44 +163,55 @@ Then, write your code to run all your models. Do not display any output.
 
 ```{r}
 #| label: cleaning data up
-mopl_clean <- mopl |> 
-  clean_names() |> 
-  mutate(used_bin = recode(id,
-                              "used" = 1, 
-                              "available" = 0)) |> 
-  select(used_bin, edgedist, vo_nest)
+mopl_clean <- mopl |> #create new object with mopl data frame
+  clean_names() |> #clean standardized column names
+  mutate(used_bin = recode(id, #create response variable for nesting site use
+                              "used" = 1, #site used is represented as 1
+                              "available" = 0)) |> #site unused (available) is represented as 0
+  select(used_bin, edgedist, vo_nest) #keep only these variables 
 
 #| label: models
-model1 <- glm(used_bin ~ 1, data = mopl_clean, family = binomial)
-
-model2 <- glm(used_bin ~ vo_nest, data = mopl_clean, family = binomial)
-
-model3 <- glm(used_bin ~ edgedist, data = mopl_clean, family = binomial)
-
-model4 <- glm(used_bin ~ vo_nest + edgedist, data = mopl_clean, family = binomial)
+#null model estimating probability of site use with neither predictors 
+model1 <- glm(used_bin ~ 1, 
+              data = mopl_clean, 
+              family = "binomial") 
+#tests effect of visual obstruction on probability of nest site use 
+model2 <- glm(used_bin ~ vo_nest, 
+              data = mopl_clean, 
+              family = "binomial") 
+#tests effect of distance to prairie dog colony on site use 
+model3 <- glm(used_bin ~ edgedist, 
+              data = mopl_clean, 
+              family = "binomial") 
+#combines both effects of visual obstruction and distance to prairie dog colony on site use
+model4 <- glm(used_bin ~ vo_nest + edgedist, 
+              data = mopl_clean, 
+              family = "binomial") 
 ```
 
 ## e.
 
 ```{r}
 #| label: AIC model selection
-AICc(
+#compare regression models using Akaike Information Criterion 
+AICc( 
   model1,
   model2,
   model3,
   model4
 ) |> 
-  arrange(AICc)
+  arrange(AICc) #ranks model from lowest to highest AICc value 
 ```
 
-The best model as determined by Akaike's Information Criterion (AIC) was the model predicting that Mountain Plover nest side was used as a function of visual obstruction. (edit!)
+The best model as determined by having the lowest Akaike's Information Criterion (AIC) value was the model predicting that Mountain Plover nest site was use as a function of visual obstruction.
 
 ## f.
 
 ```{r}
 #| label: DHARMa
+#creates simulated residuals and diagnostic plots to assess model fit 
 plot(
-  simulateResiduals(model2)
+  simulateResiduals(model2) 
 )
 ```
 
@@ -222,32 +219,33 @@ plot(
 
 ```{r}
 #| label: data visualization
-mod_preds <- ggpredict(model2,
-                       terms = "vo_nest")
-ggplot(data = mopl_clean,
-       aes(x = vo_nest,
-           y = used_bin)) +
-  geom_point(size = 3, 
-             alpha = 0.4,
-             color = "deeppink4") + 
-  geom_ribbon(data = mod_preds,
-              aes(x = x,
-                  y = predicted,
-                  ymin = conf.low,
-                  ymax = conf.high),
-              alpha = 0.3,
-              fill = "lightblue") + 
-  geom_line(data = mod_preds,
-            aes(x = x, 
-                y = predicted)) + 
-  scale_y_continuous(limits = c(0, 1),
-                     breaks = c(0, 1)) + 
+#generate model2 predicted probabilites and confidence intervals 
+mod_preds <- ggpredict(model2, #create object to store predictions
+                       terms = "vo_nest") #generate predictions 
+#base layer: ggplot 
+ggplot(data = mopl_clean, #start with mopl_clean dataframe 
+       aes(x = vo_nest, #x is visual obstruction
+           y = used_bin)) + #y is nesting site use
+  geom_point(size = 3, #add data points
+             alpha = 0.4, #make points more transparent
+             color = "deeppink4") + #make data pink
+  geom_ribbon(data = mod_preds, #use mod_preds to add confidence interval
+              aes(x = x, #x is from prediction object
+                  y = predicted, #y is predicted probabilities from model
+                  ymin = conf.low, #lower bound of CI
+                  ymax = conf.high), #upper bound of CI
+              alpha = 0.3, #make band transparent 
+              fill = "lightblue") + #make band light blue 
+  geom_line(data = mod_preds, #create line with mod_preds data
+            aes(x = x, #x values
+                y = predicted)) + #y is predicited probabilites 
+  scale_y_continuous(limits = c(0, 1), #restrict y-axis probability range
+                     breaks = c(0, 1)) + #show only 0 and 1 axis ticks
   labs(
-    x = "Visual Obstruction at Nest Site (cm)",
-    y = "Probability of Mountain Plover Nest Site Use",
-    title = "Effect of Visual Obstruction on Mountain Plover Nest Site Use"
-    ) + 
-  theme_classic()
+    x = "Visual Obstruction at Nest Site (cm)", #x-axis label
+    y = "Probability of Mountain Plover Nest Site Use", #y-axis label
+    title = "Effect of Visual Obstruction on Mountain Plover Nest Site Use") + #add graph title  
+  theme_classic() #remove gridlines
 ```
 
 ## h.
@@ -256,49 +254,28 @@ ggplot(data = mopl_clean,
 
 ## i.
 
-Calculate the predicted probability of Mountain Plover nest site occupancy at 0 on the index of visual obstruction.
-
-Show and annotate all code. Display the output.
-
 ```{r}
 #| label: probability
-ggpredict(model2,
-          terms = "vo_nest [0]")
-```
+ggpredict(model2, #generate predicted vaules from model2
+          terms = "vo_nest [0]") #calculate when visual obstruction is 0cm
 
-(add context?)
+```
 
 ## j.
 
-Write 3-5 sentences summarizing what you found, making references to the figure you made in part h and the predictions you calculated in part j. Your summary should include your interpretation of:
-
--   the predicted probability of nest site occupancy at 0 (no visual obstruction)
-
--   what relationships, if any, exist between visual obstruction and distance to prairie dog colony and probability of occupancy
-
--   the biology behind the trends you found - what explains the relationship between visual obstruction and probability of Mountain Plover nest site occupancy?
-
-The predicted probability of nest site occupancy with no visual obstruction (at 0) is .
+The predicted probability of nest site occupancy at 0 cm with no visual obstruction is 0.73 which shows there is a high probability of site use when vegetation is absent. Figure 1 has a negative sloping logistic regression line showing that as visual obstruction increases, the probability of nesting site use decreases. This relationship is found because Mountain Plovers prefer open nesting habitats with short, sparse vegetation since they are able to better visibly detect predators, oftentimes this type of environment is maintained by prairie dogs. The other predictor vairable, distance to prairie dog colony, was not included in the best-supported model from AICc test, meaning this variable has less affect on nesting site use than visual obstruction.
 
 # Problem 4. Affective and exploratory visualization
 
 ## a.
 
--   How are the visualizations different from each other in the way you have represented your data?
+-   In my Homework 2 exploratory visualization, my data is represented in a factual way that is easy to interpret due to the graph title, axis labels, and different colors for each day of the week, so viewers are able to read the histogram and get a summary of my data. Meanwhile in Homework 3 for my affective visualization, this is a much more abstract form of a visualization, so without my artist statement it would be hard to interpret. Also I created it from my real data but viewers wouldn't be able to get specific data values from looking at it.
 
-    -   In my Homework 2 exploratory visualization, my data is represented in a factual way that is easy to interpret due to the graph title, axis labels, and different colors for each day of the week, so viewers are able to read the histogram and get a summary of my data. Meanwhile in Homework 3 for my affective visualization, this is a much more abstract form of a visualization, so without my artist statement it would be hard to interpret. Also I created it from my real data but viewers wouldn't be able to get specific data values from looking at it.
+-   Between all my visualizations, I noticed a few outliers on my screen time vs sleep duration plot, but overall it appeared to be a weak negative relationship. As screen time increases, sleep duration tends to decrease slightly, but this pattern doesn't seem to appear to be very strong. I also noticed that my screen time appears to have a similar range of values for each day while sleep duration varied a lot.
 
--   What similarities do you see between all your visualizations?
+-   Like I stated earlier I noticed a pattern with my screen time duration being similar for each day while my sleep duartion varied a lot for each day. This potentially occurred because of my sleep duration or a different predictor variable not studied. In my exploratory visualization which was a box plot for day of the week vs sleep duration, I noticed Tuesdays on average tend to have the lowest sleep duration, while Monday and Wednesday on average have the most.
 
-    -   Between all my visualizations I can see that Tuesdays on average tend to have the lowest sleep duration, while Monday and Wednesday on average have the most. Additionally I noticed a few outliers on my screen time vs sleep duration plot, but there potentially is a trend for higher sleep duration with a lower screen time.
-
--   What patterns (e.g. differences in means/counts/proportions/medians, trends through time, relationships between variables) do you see in each visualization? Are these different between visualizations? If so, why? If not, why not?
-
-    -   I noticed that in the affective visualization it was difficult to .
-
--   What kinds of feedback did you get during week 9 in workshop or from the instructors? How did you implement or try those suggestions? If you tried and kept those suggestions, explain how and why; if not, explain why not.
-
-    -   I received feedback on which colors of yarn to use for my crochet visualization. I took the advice of doing white to represent my sleep duration and found a fluffy type of yarn that reminded me of a blanket. Then for screen time I used a green because I thought the color was pretty, it would stand out, and found it in the same texture as the white one. I took the feedback of instead of using the same color but in two different shades to finding two completely different colors of yarn.
+-   I received feedback on which colors of yarn to use for my crochet visualization. I took the advice of doing white to represent my sleep duration and found a fluffy type of yarn that reminded me of a blanket. Then for screen time I used a green because I thought the color was pretty, it would stand out, and found it in the same texture as the white one. I took the feedback of instead of using the same color but in two different shades to finding two completely different colors of yarn.
 
 ## b.
 
@@ -336,9 +313,9 @@ plot(model)
 summary(model)
 ```
 
-[Residuals vs Fitted]{.underline}: This plot checks if there is a linear relationship between the predictor variable, screen time, and the response variable, sleep duration. The residuals appear to be scattered somewhat evenly and randomly around the horizontal line without a strong curved pattern, although there is a slight trend in the red line showing small deviations. Overall the linearity assumption is reasonably statisfied.
+[Residuals vs Fitted]{.underline}: This plot checks if there is a linear relationship between the predictor variable, screen time, and the response variable, sleep duration. The residuals appear to be scattered somewhat evenly and randomly around the horizontal line without a strong curved pattern, although there is a slight trend in the red line showing small deviations. Overall the linearity assumption is reasonably satisfied.
 
-[QQ Residuals]{.underline}: This plot checks whether the residuals follow a normal distribution. Since most of the data points fall along the reference line, with the exception of a few, this indicates that the resiudals are normally distributed.
+[QQ Residuals]{.underline}: This plot checks whether the residuals follow a normal distribution. Since most of the data points fall along the reference line, with the exception of a few, this indicates that the residuals are normally distributed.
 
 [Scale-Location]{.underline}: This plot checks the assumption of homoscedasticity as well but with the square root of the standardized residuals. The points appear to be relatively evenly spread across the fitted values, suggesting that the variance of residuals is mostly constant so the homoscedasticity assumption is met.
 
@@ -346,57 +323,53 @@ summary(model)
 
 ### Analysis
 
-To assess the relationship between screen time (minutes), the predictor variable, and sleep duration (minutes), the response variable, I conducted a simple linear regression analysis. The regression results showed that the estimated intercept is 339.54, which is the predicted sleep duration when screen time is 0. The slope coefficient for screen time is 0.348, meaning that for every increase in 1 minutes of screen time, the predicted sleep duration increases by 0.35 minutes on average. Although the p-value for screen time coefficient is 0.163, which is greater than the significance level of 0.05, indicating a relationship that is not statistically significant.
-
-The F-statistic is 3.04
-
-### Effect size
-
-The R^2^ indicates the proportion of variance in the response variable by the predictor variable. For this model, the R^2^ value is 0.0618 which means that 6.18% of the variation in sleep duration is explained by screen time, a small effect size.
+To assess the relationship between screen time (minutes), the predictor variable, and sleep duration (minutes), the response variable, I conducted a simple linear regression analysis. The regression results showed that the estimated intercept is 339.54, which is the predicted sleep duration when screen time is 0. The slope coefficient for screen time is 0.348, meaning that for every increase in 1 minutes of screen time, the predicted sleep duration increases by approximately 0.35 minutes on average. Although the p-value for screen time coefficient is 0.163, which is greater than the significance level of 0.05, indicating a relationship that is not statistically significant, so we can't conclude that screen time is a meaningful predictor of sleep duration in this data. Additionally, the F-statistic is 2.04 (p = 0.163) which indicates that the overall model is not statistically significant. For overall effect size, the R^2^ value is 0.0618 meaning that only 6.18% of the variability in sleep duration is explained by screen time, this is a small effect size. Lastly, the large residual standard error of 70.93 minutes show there is a large variability in sleep duration that is not explained by the model.
 
 ## d.
 
 ```{r}
 #| label: predictions
-data_pred <- ggpredict(
-  model,
-  terms = "screen_time_minutes"
+data_pred <- ggpredict( #use ggpredict() to generate predicted valued 
+  model, #use model from lm()
+  terms = "screen_time_minutes" #values of screen_time_minutes
 )
+#print out results 
 data_pred
 ```
 
 ```{r}
 #| label: model summary
-tbl_regression (model,
-                intercept = TRUE,
-                label = list(`(Intercept)` = "Intercept",
-                `screen_time_minutes` = "Screen Time")) |> 
-  as_flex_table()
+#create regression table from model 
+tbl_regression (model, #model object from lm()
+                intercept = TRUE, #include the intercept term in table
+                label = list(`(Intercept)` = "Intercept", #rename row
+                `screen_time_minutes` = "Screen Time")) |> #rename row
+  as_flex_table() #display table
 ```
 
 ```{r}
 #| label: visualization
-ggplot(data = my_data_clean,
-       aes(x = screen_time_minutes,
-           y = sleep_duration_minutes)) + 
-  geom_point(size = 3,
-             stroke = 1,
-             fill = "purple4",
-             shape = 23) +
-  geom_ribbon(data = data_pred,
-              aes(x = x,
-                  y = predicted,
-                  ymin = conf.low,
-                  ymax = conf.high),
-              alpha = 0.2) + 
-  geom_line(data = data_pred,
-            aes(x = x,
-                y = predicted),
-            linewidth = 1) + 
-  labs(x = "Screen time (minutes)",
-       y = "Sleep duration (minutes)",
-       title = "Screen Time vs Sleep Duartion") + 
-  theme_minimal()
+ggplot(data = my_data_clean, #ggplot with my_data_clean dataframe
+       aes(x = screen_time_minutes, #screen time on x-axis
+           y = sleep_duration_minutes)) + #sleep duration on y-axis
+  geom_point(size = 3, #size of points
+             stroke = 1, #width of point border
+             fill = "purple4", #make points purple
+             shape = 23) + #make points diamonds
+  geom_ribbon(data = data_pred, #shaded CI ribbion from predictions
+              aes(x = x, #predictor value
+                  y = predicted, #predicted outcome
+                  ymin = conf.low, #lower bound of CI
+                  ymax = conf.high), #upper bound of CI
+              alpha = 0.2) + #transparency of ribbon
+  geom_line(data = data_pred, #line for predicted values
+            aes(x = x, #predictor value
+                y = predicted), #predicted outcome
+            linewidth = 1) + #line thickness
+  labs(x = "Screen time (minutes)", #add x-axis label
+       y = "Sleep duration (minutes)", #add y-axis label
+       title = "Screen Time vs Sleep Duartion") + #add graph title 
+  theme_minimal() #change theme
 ```
 
 ## e.
@@ -405,8 +378,4 @@ ggplot(data = my_data_clean,
 
 ## f. 
 
-Sleep duration (minutes) showed a slight positive relationship with screen time (minutes). Although screen time was not a statistically significant predictor of sleep duration, as screen time increased so did sleep duration (linear regression, F(1, 31) = 2.04, R^2^ = 0.062, p = 0.163, $\alpha$ = 0.05). Based on model predictions, for each additional 1 minute increase in screen time, sleep duration increased by 0.35 minutes (β = 0.348 ± 0.244 SE). On average,
-
-Screen time only explained 6.2% of the variation in sleep duration.
-
-include effect size??
+Sleep duration (minutes) showed a slight positive relationship with screen time (minutes). Although screen time was not a statistically significant predictor of sleep duration, as screen time increased so did sleep duration (linear regression, F(1, 31) = 2.04, R^2^ = 0.062, p = 0.163, $\alpha$ = 0.05). Based on model predictions, for each additional 1 minute increase in screen time, sleep duration increased by 0.35 minutes (β = 0.348 ± 0.244 SE). On average, screen time only explained 6.2% of the variation in sleep duration which is a small effect size.
