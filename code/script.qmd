@@ -136,22 +136,22 @@ Carpinteria shows the least variable mean kelp fronds per year with its data poi
 
 ## a.
 
-The response variable is the nest survival of a Mountain Plover determined as if the site is used or available, the 1s mean the nest successfully survived so the site is used, while the 0s mean the nest failed, either due to predation or abandonment so the site is available.
+The response variable is if the nesting site of a Mountain Plover is in use or available, the 1s mean the site is used, while the 0s means the nesting site is available.
 
 ## b.
 
-Visual Obstruction:
+Visual obstruction:
 
 -   This predictor variable is a continuous variable, measured in cm. As visual obstruction increases, the probability of Mountain Plover nest sites would decrease, as noted in the Introduction section this because these birds prefer "short and sparse vegetation" to breed on.
 
 Distance to prairie dog colony:
 
--   This predictor variable is a continuous variable, measured as the distance (meters). As distance to a prairie dog colony increases, the probability of Mountain Plover nest site use would decrease because prairie dogs create ideal nesting habitats for Mountain Plovers through soil disturbance and vegetation clipping, found in the Introduction section.
+-   This predictor variable is a continuous variable, measured as the distance (meters). As distance to a prairie dog colony increases, the probability of Mountain Plover nest site use would decrease because prairie dogs create ideal nesting habitats for Mountain Plovers through soil disturbance and vegetation clipping, which is also found in the Introduction section.
 
 ## c.
 
 | Model Number | Visual Obstruction | Distance to Prairie Dog Colony | Model Description |
-|----|:--:|:--:|:--:|
+|------------------|:----------------:|:----------------:|:----------------:|
 | 1 |  |  | No predictors (null model) |
 | 2 | X | X | Saturated model (both predictors) |
 | 3 | X |  | Model with visual obstruction only |
